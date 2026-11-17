@@ -8,9 +8,3 @@ exceptions:
     rule: C7
     reason: описание шаблона секрета в документации, не секрет
     date: 2026-11-17
-
-  - file: docs/prerequisites.md
-    line: "cd <путь-к-репозиторию>          # например: cd C:\\Users\\<имя>\\Projects\\RU_Labour_Market_Analysis_2026"
-    rule: C8
-    reason: пример пути в инструкции установки для Windows (проверить при ревью)
-    date: 2026-11-17
