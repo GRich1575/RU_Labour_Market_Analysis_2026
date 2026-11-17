@@ -140,4 +140,5 @@ if [ "$TO_MAIN" -eq 1 ]; then
   if [ "$DRY" -eq 1 ]; then say "would promote $BASE to $branch and push $BASE (dry-run)"; else say "promoted $BASE to $branch and pushed $BASE"; fi
 fi
 
-if [ "$DRY" -eq 1 ]; then say "dry-run complete: nothing changed"; else say "done: $branch pushed${merged:+ (merged origin/$BASE)}"; fi
+if [ "$DRY" -eq 1 ]; then say "dry-run complete: nothing changed"; elif [ "$merged" -eq 1 ]; then say "done: $branch pushed (merged origin/$BASE)"
+else say "done: $branch pushed (no merge needed)"; fi
