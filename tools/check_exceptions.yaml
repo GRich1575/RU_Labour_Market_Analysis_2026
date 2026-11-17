@@ -1,0 +1,58 @@
+# Исключения для tools/check_repo.py (см. docs/team/automation_design.md, п. 6).
+# Исключение действует, только если путь совпадает и текст строки содержит `contains`.
+# Каждое исключение проходит ревью как любой код. Без причины и даты не добавлять.
+
+exceptions:
+  - file: docs/team/automation_design.md
+    contains: "(?i)(password|passwd"
+    rule: C7
+    reason: описание шаблона секрета в документации, не секрет
+    date: 2026-11-17
+
+  - file: docs/homework/setup_guide_en.html
+    contains: "Access token."
+    rule: C7
+    reason: инструкция для новичков по созданию токена GitHub, не секрет
+    date: 2026-11-17
+
+  - file: docs/homework/setup_guide_en.html
+    contains: "the password is the <b>token</b>"
+    rule: C7
+    reason: инструкция для новичков, текст без значения токена
+    date: 2026-11-17
+
+  - file: .github/pull_request_template.md
+    contains: "Пути относительные (без"
+    rule: C8
+    reason: описание правила пути, пример запрещённого написания
+    date: 2026-11-17
+
+  - file: docs/START_HERE.md
+    contains: "не используем `C:"
+    rule: C8
+    reason: описание правила пути, пример запрещённого написания
+    date: 2026-11-17
+
+  - file: docs/prerequisites.md
+    contains: "C:\\"
+    rule: C8
+    reason: пример пути в инструкции установки для Windows (проверить при ревью)
+    date: 2026-11-17
+
+  - file: docs/stage1/issues.md
+    contains: "попал в `docs/prerequisites.md`"
+    rule: C8
+    reason: запись журнала о найденном и исправленном абсолютном пути, пример
+    date: 2026-11-17
+
+  - file: docs/cheatsheets/markdown.md
+    contains: "docs/prerequisites.md"
+    rule: C9
+    reason: пример синтаксиса ссылки в шпаргалке
+    date: 2026-11-17
+
+  - file: docs/cheatsheets/markdown.md
+    contains: "path/to/image.png"
+    rule: C9
+    reason: пример синтаксиса картинки в шпаргалке
+    date: 2026-11-17
