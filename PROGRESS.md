@@ -25,7 +25,8 @@ Updated: 2026-11-17 | Branch: feature/framework | Текущий этап: 1 —
 
 ## Коммиты
 `9234478` этап 1 · `3fb8e17` · `3f35e35` (число источников) · `d70e945` (prerequisites) · `54e6286` (requirements, README, шпаргалки) · `64344d9` (PROGRESS).
-Ветка feature/framework; не запушена; main не создан.
+Ветка feature/framework запушена в origin (отслеживается); main не создан.
+Роли: один участник — владелец проекта, координатор, владелец данных и стюард. Добавление участников — позже.
 
 ## Ограничения среды проверки
 - Недоступны из среды: rosstat.gov.ru, cetr.ru, cmasf.ru (000); fedstat.ru, api.hh.ru, ilostat, oecd (403).
