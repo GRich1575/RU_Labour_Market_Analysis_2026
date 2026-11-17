@@ -14,5 +14,5 @@
   <text x="50" y="276" font-size="14" fill="#eee">pip install -r requirements.txt</text>
   <text x="50" y="318" font-size="14" fill="#9ad09a" font-family="Segoe UI, Arial, sans-serif" font-weight="bold">RIGHT: "(.venv)" is shown at the start of the prompt</text>
   <!-- markers -->
-  <g><circle cx="90" cy="206" r="15" fill="#d62728"/><text x="90" y="207" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Arial, sans-serif">1</text></g>
+  <g><circle cx="60" cy="178" r="15" fill="#d62728"/><text x="60" y="179" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, Arial, sans-serif">1</text></g>
 </svg>
