@@ -1,0 +1,16 @@
+# Зависимости проекта (Python 3.11+). Установка: pip install -r requirements.txt
+# Расчёты и таблицы
+pandas>=2.2
+numpy>=2.0
+# Конфигурация (config/*.yaml)
+pyyaml>=6.0
+# Загрузка данных из источников
+requests>=2.31
+# Форматы: XLSX (pandas.read_excel), SPSS .sav (pandas.read_spss), HTML/XML (read_html / read_xml)
+openpyxl>=3.1
+pyreadstat>=1.2
+lxml>=5.0
+# PDF-таблицы (сборники Росстата)
+pdfplumber>=0.11
+# Тесты (этап 2+)
+pytest>=8.0
