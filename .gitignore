@@ -1,0 +1,12 @@
+# Данные: сырые файлы не хранятся в репозитории
+data/raw/*
+!data/raw/README.md
+data/processed/*
+!data/processed/README.md
+
+# Служебные
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.env

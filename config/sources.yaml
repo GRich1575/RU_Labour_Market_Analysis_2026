@@ -1,0 +1,199 @@
+# Реестр источников данных. Один источник = один блок.
+# status: to_verify — адрес/формат/доступ не подтверждены; verified — проверено вручную.
+# goal: 1 шоки и инфляция; 2 вакансии/безработные по сферам; 3 МСП; справка — только для сравнения.
+
+sources:
+  - id: rosstat_orc
+    name: Обследование рабочей силы (ОРС)
+    provider: Росстат
+    role: база
+    goal: [1, 2]
+    indicators: безработица по МОТ, занятость, рабочая сила
+    access: ЕМИСС (fedstat.ru), публикации rosstat.gov.ru
+    format: XLSX / CSV (ЕМИСС), PDF (сборники)
+    frequency: ежемесячно; ежеквартально (сборник)
+    geography: РФ, федеральные округа, регионы
+    status: to_verify
+    notes: ID показателя взять из адреса страницы ЕМИСС; выборочный опрос, при уровне ~2% погрешность заметна
+
+  - id: rosstat_part_time
+    name: Неполная занятость и простои
+    provider: Росстат
+    role: сверка (скрытая безработица)
+    goal: [2]
+    indicators: неполная занятость, простои
+    access: публикации Росстата (квартальная форма)
+    format: XLSX / PDF
+    frequency: ежеквартально
+    geography: РФ, регионы
+    status: to_verify
+    notes: главный официальный индикатор скрытой безработицы
+
+  - id: rosstat_cpi
+    name: Индекс потребительских цен (ИПЦ)
+    provider: Росстат
+    role: инфляция
+    goal: [1]
+    indicators: ИПЦ месячный и годовой, базовая инфляция
+    access: ЕМИСС, rosstat.gov.ru
+    format: XLSX / CSV
+    frequency: ежемесячно
+    geography: РФ
+    status: to_verify
+    notes: нужен для анализа шоков
+
+  - id: rosstat_smb
+    name: Малое и среднее предпринимательство (МСП)
+    provider: Росстат
+    role: дополнительно
+    goal: [3]
+    indicators: число МСП, занятость в МСП, выручка
+    access: публикации Росстата
+    format: XLSX / PDF
+    frequency: ежегодно / ежеквартально
+    geography: РФ, регионы
+    status: to_verify
+    notes: определение МСП уточнить (209-ФЗ или Росстат)
+
+  - id: rostrud_registered
+    name: Зарегистрированная безработица (службы занятости)
+    provider: Роструд
+    role: сверка
+    goal: [1, 2]
+    indicators: состоят на учёте, признаны безработными, нагрузка на вакансию
+    access: rostrud.ru («Ситуация на рынке труда»), data.gov.ru
+    format: PDF / XLSX (таблицы)
+    frequency: ежемесячно
+    geography: РФ, регионы
+    status: to_verify
+    notes: НЕ сравнивать напрямую с МОТ-безработицей; разбивка по профессиям не подтверждена
+
+  - id: cbr_key_rate
+    name: Ключевая ставка
+    provider: Банк России
+    role: шоки
+    goal: [1]
+    indicators: ключевая ставка
+    access: сервис DailyInfo (SOAP, https), cbr.ru статистика
+    format: XML
+    frequency: по решениям ЦБ
+    geography: РФ
+    status: to_verify
+    notes: описания старых API могут быть устаревшими
+
+  - id: cbr_monitoring
+    name: Мониторинг предприятий (кадры, планы найма)
+    provider: Банк России
+    role: сверка
+    goal: [2, 3]
+    indicators: обеспеченность кадрами, планы найма, дефицит кадров
+    access: cbr.ru (обзоры, «Региональная экономика»)
+    format: PDF
+    frequency: ежеквартально
+    geography: РФ, регионы
+    status: to_verify
+    notes: качественные оценки бизнеса
+
+  - id: hh_monthly
+    name: Краткий обзор рынка труда hh.ru (hh-индекс)
+    provider: hh.ru
+    role: опережающий индикатор
+    goal: [1, 2]
+    indicators: hh-индекс (резюме / вакансии), динамика вакансий и резюме, зарплаты
+    access: stats.hh.ru (ежемесячные отчёты, API monthly-report)
+    format: JSON (API) / HTML
+    frequency: ежемесячно
+    geography: РФ, регионы, специальности
+    status: to_verify
+    notes: охват — в основном городские «белые воротнички»; условия использования уточнить
+
+  - id: hh_vacancies
+    name: Вакансии и резюме hh.ru по профессиям
+    provider: hh.ru
+    role: основа для цели 2 (прокси сегментации)
+    goal: [2]
+    indicators: вакансии и резюме по профессиям и регионам
+    access: публичный API hh.ru (лимиты уточнить)
+    format: JSON
+    frequency: по запросу
+    geography: РФ, регионы
+    status: to_verify
+    notes: ключевой источник для сегментации по сферам, если ОРС не даёт безработных по профессиям
+
+  - id: sberindex
+    name: СберИндекс
+    provider: Сбер
+    role: независимый
+    goal: [2, 3]
+    indicators: зарплаты, занятость по отраслям и регионам
+    access: sberindex.ru (публичный доступ уточнить)
+    format: уточнить
+    frequency: уточнить
+    geography: уточнить
+    status: to_verify
+    notes: данные одного банка; публичные выгрузки не подтверждены
+
+  - id: rlms_hse
+    name: RLMS-HSE (мониторинг домохозяйств)
+    provider: ВШЭ
+    role: микроданные
+    goal: [1, 2, 3]
+    indicators: зарплаты, неформальность, мобильность
+    access: hse.ru (регистрация, условия использования)
+    format: SPSS / Stata / CSV
+    frequency: волнами (ежегодно)
+    geography: РФ
+    status: to_verify
+    notes: для научного анализа; задержка публикации
+
+  - id: hse_isiez
+    name: Индексы занятости по отраслям (ИСИЭЗ ВШЭ)
+    provider: ВШЭ
+    role: независимый
+    goal: [2]
+    indicators: индексы занятости и вакансий по отраслям
+    access: hse.ru (публикации)
+    format: PDF / XLSX
+    frequency: ежеквартально
+    geography: РФ, отрасли
+    status: to_verify
+    notes: ""
+
+  - id: cetr
+    name: Аналитика ЦеТИ
+    provider: ЦеТИ
+    role: независимый
+    goal: [1, 2]
+    indicators: обзоры рынка труда, зарплаты
+    access: cetr.ru (публикации)
+    format: PDF
+    frequency: по мере выхода
+    geography: РФ
+    status: to_verify
+    notes: ""
+
+  - id: cmasf
+    name: Обзоры ЦМАКП
+    provider: ЦМАКП
+    role: независимый
+    goal: [1, 3]
+    indicators: обзоры экономики, МСП, рынка труда
+    access: https://cmasf.ru/papers.html
+    format: PDF
+    frequency: по мере выхода
+    geography: РФ
+    status: to_verify
+    notes: ""
+
+  - id: ilostat_oecd
+    name: ILOSTAT / OECD
+    provider: ILO / OECD
+    role: справка (перепечатка Росстата)
+    goal: []
+    indicators: сравнение со странами
+    access: ilostat.ilo.org, data.oecd.org
+    format: CSV
+    frequency: ежегодно
+    geography: страны
+    status: to_verify
+    notes: не является независимой проверкой; только для межстрановых сравнений
