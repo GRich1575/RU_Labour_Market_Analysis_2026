@@ -25,7 +25,7 @@ Updated: 2026-11-17 | Branch: feature/framework | Текущий этап: 1 —
 
 ## Коммиты
 `9234478` этап 1 · `3fb8e17` · `3f35e35` (число источников) · `d70e945` (prerequisites) · `54e6286` (requirements, README, шпаргалки) · `64344d9` (PROGRESS).
-Ветка feature/framework запушена в origin (отслеживается); main не создан.
+Ветка feature/framework запушена в origin (отслеживается). Ветка main создана из feature/framework (a72186c) и запушена в origin; локально работаем в feature/framework.
 Роли: один участник — владелец проекта, координатор, владелец данных и стюард. Добавление участников — позже.
 
 ## Ограничения среды проверки
