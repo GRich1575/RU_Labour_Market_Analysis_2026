@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Глоссарий проекта</title>
+<style>
+  body { font-family: "Segoe UI", Arial, sans-serif; max-width: 1100px; margin: 0 auto; padding: 24px; color: #222; line-height: 1.5; background: #fff; }
+  h1 { font-size: 28px; border-bottom: 3px solid #2b6cb0; padding-bottom: 8px; }
+  h2 { font-size: 21px; margin-top: 36px; border-bottom: 1px solid #ccd; padding-bottom: 4px; color: #1f4e79; }
+  a { color: #2b6cb0; word-break: break-all; }
+  code { font-family: Consolas, "Courier New", monospace; background: #f1f3f6; padding: 1px 5px; border-radius: 3px; font-size: 92%; }
+  .legend { background: #f7f9fc; border-left: 5px solid #2b6cb0; padding: 8px 16px; border-radius: 4px; font-size: 15px; }
+  .search { width: 100%; box-sizing: border-box; padding: 10px 12px; font-size: 16px; border: 1px solid #8a94a0; border-radius: 6px; margin: 16px 0 6px; }
+  .count { font-size: 14px; color: #555; margin-bottom: 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; margin-bottom: 8px; }
+  th, td { border: 1px solid #ccd3de; padding: 6px 8px; text-align: left; vertical-align: top; }
+  th { background: #eef3fa; position: sticky; top: 0; }
+  td.term { font-weight: bold; white-space: nowrap; }
+  td.en { font-style: italic; color: #333; }
+  .nolink { color: #999; }
+  tr.hidden { display: none; }
+  .note { font-size: 13px; color: #555; }
+</style>
+</head>
+<body>
+
+<h1>Глоссарий проекта</h1>
+
+<p>Термины проекта: экономика рынка труда, статистика, данные, технологии и командная работа. Для каждого термина — краткое пояснение и ссылки для углублённого изучения на русском и английском языках (для перекрёстной проверки).</p>
+
+<div class="legend">
+  <b>Обозначения в ссылках:</b><br>
+  <code>—</code> — официального аналога на этом языке нет или ссылка не нужна;<br>
+  <code>‡</code> — ссылка не открылась из среды проверки (возможно, ограничение доступа); проверьте в браузере.
+</div>
+
+<input class="search" id="q" type="search" placeholder="Поиск по термину, английскому названию или пояснению…" aria-label="Поиск">
+<div class="count" id="count"></div>
+
+<!-- ============================================================ -->
+<h2>1. Рынок труда и статистика</h2>
+<table>
+<tr><th>Термин</th><th>English</th><th>Пояснение</th><th>Подробнее (RU)</th><th>Подробнее (EN)</th></tr>
+<tr><td class="term">Безработица</td><td class="en">Unemployment</td><td>Люди без работы, которые ищут её и готовы приступить. Для проекта — уровень безработицы по методологии МОТ</td><td><a href="https://ru.wikipedia.org/wiki/Безработица">ru.wikipedia.org/wiki/Безработица</a></td><td><a href="https://en.wikipedia.org/wiki/Unemployment">en.wikipedia.org/wiki/Unemployment</a></td></tr>
+<tr><td class="term">Безработица по методологии МОТ</td><td class="en">ILO unemployment</td><td>Определение Международной организации труда: нет работы, активно искал работу за последние 4 недели и готов приступить в ближайшие 2 недели. Основной показатель ОРС</td><td><a href="https://www.ilo.org/">ilo.org</a> ‡ (общий вход)</td><td><a href="https://ilostat.ilo.org/">ilostat.ilo.org</a> ‡</td></tr>
+<tr><td class="term">Рабочая сила</td><td class="en">Labour force</td><td>Занятые плюс безработные</td><td><a href="https://ru.wikipedia.org/wiki/Рабочая_сила">ru.wikipedia.org/wiki/Рабочая_сила</a></td><td><a href="https://en.wikipedia.org/wiki/Labour_force">en.wikipedia.org/wiki/Labour_force</a></td></tr>
+<tr><td class="term">Занятость</td><td class="en">Employment</td><td>Работа за плату или прибыль; у МОТ — хотя бы один час работы за неделю</td><td><a href="https://ru.wikipedia.org/wiki/Занятость">ru.wikipedia.org/wiki/Занятость</a></td><td><a href="https://en.wikipedia.org/wiki/Employment">en.wikipedia.org/wiki/Employment</a></td></tr>
+<tr><td class="term">Неполная занятость</td><td class="en">Underemployment</td><td>Работа меньше полного рабочего времени при желании работать больше</td><td><a href="https://ru.wikipedia.org/wiki/Неполная_занятость">ru.wikipedia.org/wiki/Неполная_занятость</a></td><td><a href="https://en.wikipedia.org/wiki/Underemployment">en.wikipedia.org/wiki/Underemployment</a></td></tr>
+<tr><td class="term">Простой</td><td class="en">Idle time / layoff</td><td>Временное прекращение работы по инициативе работодателя; в проекте — показатель скрытой безработицы (Росстат)</td><td><a href="https://rosstat.gov.ru/">rosstat.gov.ru</a> ‡</td><td class="nolink">—</td></tr>
+<tr><td class="term">Зарегистрированная безработица</td><td class="en">Registered unemployment</td><td>Люди, состоящие на учёте в службе занятости. Не совпадает с МОТ, сравнивать напрямую нельзя</td><td><a href="https://rostrud.gov.ru/">rostrud.gov.ru</a></td><td class="nolink">—</td></tr>
+<tr><td class="term">Служба занятости</td><td class="en">Public employment service</td><td>Государственный орган, регистрирует безработных и ищет работу</td><td><a href="https://rostrud.gov.ru/">rostrud.gov.ru</a></td><td><a href="https://en.wikipedia.org/wiki/Public_employment_service">en.wikipedia.org/wiki/Public_employment_service</a></td></tr>
+<tr><td class="term">Вакансия</td><td class="en">Job vacancy</td><td>Открытая позиция, на которую работодатель ищет сотрудника</td><td><a href="https://ru.wikipedia.org/wiki/Вакансия">ru.wikipedia.org/wiki/Вакансия</a></td><td class="nolink">—</td></tr>
+<tr><td class="term">Резюме</td><td class="en">Résumé / CV</td><td>Документ соискателя о квалификации и опыте</td><td><a href="https://ru.wikipedia.org/wiki/Резюме">ru.wikipedia.org/wiki/Резюме</a></td><td><a href="https://en.wikipedia.org/wiki/Résumé">en.wikipedia.org/wiki/Résumé</a></td></tr>
+<tr><td class="term">Соотношение вакансий и резюме</td><td class="en">Vacancy-to-applicant ratio</td><td>Число вакансий, делённое на число резюме; показывает дефицит или избыток рабочей силы</td><td><a href="https://hh.ru/article/26641">hh.ru/article/26641</a></td><td class="nolink">—</td></tr>
+<tr><td class="term">hh-индекс</td><td class="en">hh index</td><td>Индекс hh.ru: соотношение резюме и вакансий по региону и профессии</td><td><a href="https://hh.ru/article/26641">hh.ru/article/26641</a></td><td class="nolink">—</td></tr>
+<tr><td class="term">Малое и среднее предпринимательство (МСП)</td><td class="en">Small and medium-sized enterprises (SME)</td><td>Компании по размеру (численность и выручка). Критерии в РФ — 209-ФЗ</td><td><a href="https://ru.wikipedia.org/wiki/Малое_и_среднее_предпринимательство">ru.wikipedia.org/wiki/Малое_и_среднее_предпринимательство</a></td><td><a href="https://en.wikipedia.org/wiki/Small_and_medium-sized_enterprises">en.wikipedia.org/wiki/Small_and_medium-sized_enterprises</a></td></tr>
+<tr><td class="term">Обследование рабочей силы (ОРС)</td><td class="en">Labour force survey (LFS)</td><td>Выборочный опрос домохозяйств; основа оценки безработицы по МОТ</td><td><a href="https://www.fedstat.ru/indicator/43062">fedstat.ru/indicator/43062</a> ‡</td><td><a href="https://ilostat.ilo.org/">ilostat.ilo.org</a> ‡</td></tr>
+<tr><td class="term">ЕМИСС</td><td class="en">Unified interdepartmental statistical information system</td><td>Единая межведомственная статистическая информационная система — база показателей Росстата</td><td><a href="https://www.fedstat.ru/">fedstat.ru</a> ‡</td><td class="nolink">—</td></tr>
+<tr><td class="term">Росстат</td><td class="en">Rosstat (Federal State Statistics Service)</td><td>Федеральная служба государственной статистики</td><td><a href="https://rosstat.gov.ru/">rosstat.gov.ru</a> ‡</td><td><a href="https://eng.rosstat.gov.ru/">eng.rosstat.gov.ru</a> ‡</td></tr>
+<tr><td class="term">Роструд</td><td class="en">Rostrud (Federal Labour and Employment Service)</td><td>Федеральная служба по труду и занятости</td><td><a href="https://rostrud.gov.ru/">rostrud.gov.ru</a></td><td class="nolink">—</td></tr>
+<tr><td class="term">МОТ (ILO)</td><td class="en">International Labour Organization (ILO)</td><td>Международная организация труда, разрабатывает методологию рынка труда</td><td><a href="https://www.ilo.org/">ilo.org</a> ‡</td><td><a href="https://www.ilo.org/">ilo.org</a> ‡</td></tr>
+<tr><td class="term">ILOSTAT</td><td class="en">ILOSTAT</td><td>База данных МОТ по рынку труда</td><td><a href="https://ilostat.ilo.org/">ilostat.ilo.org</a> ‡</td><td><a href="https://ilostat.ilo.org/">ilostat.ilo.org</a> ‡</td></tr>
+<tr><td class="term">OECD</td><td class="en">Organisation for Economic Co-operation and Development</td><td>Организация экономического сотрудничества и развития; база статистики стран ОЭСР</td><td><a href="https://www.oecd.org/">oecd.org</a> ‡</td><td><a href="https://www.oecd.org/">oecd.org</a> ‡</td></tr>
+<tr><td class="term">Панельные данные</td><td class="en">Panel data</td><td>Данные об одних и тех же людях или организациях в несколько моментов времени</td><td><a href="https://ru.wikipedia.org/wiki/Панельные_данные">ru.wikipedia.org/wiki/Панельные_данные</a></td><td><a href="https://en.wikipedia.org/wiki/Panel_data">en.wikipedia.org/wiki/Panel_data</a></td></tr>
+<tr><td class="term">RLMS-HSE</td><td class="en">Russia Longitudinal Monitoring Survey, HSE</td><td>Панельный опрос домохозяйств ВШЭ; данные по волнам (годам)</td><td><a href="https://www.hse.ru/rlms/">hse.ru/rlms</a></td><td><a href="https://www.hse.ru/en/rlms/">hse.ru/en/rlms</a></td></tr>
+<tr><td class="term">Волна (опроса)</td><td class="en">Survey wave</td><td>Один цикл опроса в панели; в RLMS — отдельный год</td><td><a href="https://www.hse.ru/rlms/">hse.ru/rlms</a></td><td><a href="https://www.hse.ru/en/rlms/">hse.ru/en/rlms</a></td></tr>
+<tr><td class="term">ИСИЭЗ ВШЭ</td><td class="en">HSE ISIEZ (Institute for Statistical Research and Economics of Knowledge)</td><td>Институт статистических исследований и экономики знаний ВШЭ; индексы занятости и вакансий по отраслям</td><td><a href="https://www.hse.ru/en/">hse.ru/en</a></td><td><a href="https://www.hse.ru/en/">hse.ru/en</a></td></tr>
+<tr><td class="term">ЦеТИ</td><td class="en">CETR (Center for Economic and Technological Research)</td><td>Центр экономических и технологических исследований; аналитика рынка труда</td><td><a href="https://cetr.ru/">cetr.ru</a> ‡</td><td class="nolink">—</td></tr>
+<tr><td class="term">ЦМАКП</td><td class="en">CMASF (Center for Macroeconomic Analysis and Short-term Forecasting)</td><td>Центр макроэкономического анализа и краткосрочного прогнозирования</td><td><a href="https://cmasf.ru/">cmasf.ru</a> ‡</td><td class="nolink">—</td></tr>
+<tr><td class="term">СберИндекс</td><td class="en">SberIndex</td><td>Аналитический сервис Сбера; индексы зарплат и занятости</td><td><a href="https://sberindex.ru/">sberindex.ru</a></td><td class="nolink">—</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>2. Инфляция, ставка и шоки</h2>
+<table>
+<tr><th>Термин</th><th>English</th><th>Пояснение</th><th>Подробнее (RU)</th><th>Подробнее (EN)</th></tr>
+<tr><td class="term">Инфляция</td><td class="en">Inflation</td><td>Устойчивый рост общего уровня цен</td><td><a href="https://ru.wikipedia.org/wiki/Инфляция">ru.wikipedia.org/wiki/Инфляция</a></td><td><a href="https://en.wikipedia.org/wiki/Inflation">en.wikipedia.org/wiki/Inflation</a></td></tr>
+<tr><td class="term">Индекс потребительских цен (ИПЦ)</td><td class="en">Consumer price index (CPI)</td><td>Изменение стоимости набора товаров и услуг; основной показатель инфляции</td><td><a href="https://ru.wikipedia.org/wiki/Индекс_потребительских_цен">ru.wikipedia.org/wiki/Индекс_потребительских_цен</a></td><td><a href="https://en.wikipedia.org/wiki/Consumer_price_index">en.wikipedia.org/wiki/Consumer_price_index</a></td></tr>
+<tr><td class="term">Базовая инфляция</td><td class="en">Core inflation</td><td>Инфляция без наиболее колеблющихся компонентов (продовольствие, энергия, сезонные товары)</td><td><a href="https://ru.wikipedia.org/wiki/Базовая_инфляция">ru.wikipedia.org/wiki/Базовая_инфляция</a></td><td><a href="https://en.wikipedia.org/wiki/Core_inflation">en.wikipedia.org/wiki/Core_inflation</a></td></tr>
+<tr><td class="term">Ключевая ставка</td><td class="en">Key rate (policy rate)</td><td>Ставка, по которой ЦБ РФ кредитует банки; ориентир для процентов в экономике</td><td><a href="https://www.cbr.ru/hd_base/KeyRate/">cbr.ru/hd_base/KeyRate</a></td><td><a href="https://en.wikipedia.org/wiki/Interest_rate">en.wikipedia.org/wiki/Interest_rate</a></td></tr>
+<tr><td class="term">Банк России (ЦБ)</td><td class="en">Bank of Russia (CBR)</td><td>Центральный банк РФ</td><td><a href="https://www.cbr.ru/">cbr.ru</a></td><td><a href="https://www.cbr.ru/eng/">cbr.ru/eng</a> ‡</td></tr>
+<tr><td class="term">Шок</td><td class="en">Economic shock</td><td>Неожиданное событие, сильно меняющее экономику (цена нефти, санкции, пандемия)</td><td><a href="https://ru.wikipedia.org/wiki/Экономический_шок">ru.wikipedia.org/wiki/Экономический_шок</a></td><td><a href="https://en.wikipedia.org/wiki/Economic_shock">en.wikipedia.org/wiki/Economic_shock</a></td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>3. Данные и форматы</h2>
+<table>
+<tr><th>Термин</th><th>English</th><th>Пояснение</th><th>Подробнее (RU)</th><th>Подробнее (EN)</th></tr>
+<tr><td class="term">Сырые данные (raw)</td><td class="en">Raw data</td><td>Файлы в исходном виде, как скачаны; не редактируются. В проекте — <code>data/raw/</code></td><td class="nolink">—</td><td><a href="https://en.wikipedia.org/wiki/Raw_data">en.wikipedia.org/wiki/Raw_data</a></td></tr>
+<tr><td class="term">Обработанные данные (processed)</td><td class="en">Processed data</td><td>Очищенные таблицы, созданные кодом. В проекте — <code>data/processed/</code></td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Справочники (reference)</td><td class="en">Reference data</td><td>Небольшие таблицы-словари (регионы, коды). В проекте — <code>data/reference/</code></td><td class="nolink">—</td><td><a href="https://en.wikipedia.org/wiki/Reference_data">en.wikipedia.org/wiki/Reference_data</a></td></tr>
+<tr><td class="term">Образец (sample)</td><td class="en">Sample file</td><td>Усечённая копия данных для проверки (≤200 строк, ≤1 МБ)</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Выборка</td><td class="en">Sample (statistics)</td><td>Часть генеральной совокупности, по которой делают выводы; ОРС — выборочный опрос</td><td class="nolink">—</td><td><a href="https://en.wikipedia.org/wiki/Sampling_(statistics)">en.wikipedia.org/wiki/Sampling_(statistics)</a></td></tr>
+<tr><td class="term">CSV</td><td class="en">Comma-separated values</td><td>Текстовый формат таблиц: значения через разделитель</td><td><a href="https://ru.wikipedia.org/wiki/CSV">ru.wikipedia.org/wiki/CSV</a></td><td><a href="https://en.wikipedia.org/wiki/Comma-separated_values">en.wikipedia.org/wiki/Comma-separated_values</a></td></tr>
+<tr><td class="term">XLSX</td><td class="en">Office Open XML spreadsheet</td><td>Формат таблиц Excel</td><td><a href="https://ru.wikipedia.org/wiki/Office_Open_XML">ru.wikipedia.org/wiki/Office_Open_XML</a></td><td><a href="https://en.wikipedia.org/wiki/Office_Open_XML">en.wikipedia.org/wiki/Office_Open_XML</a></td></tr>
+<tr><td class="term">JSON</td><td class="en">JavaScript Object Notation</td><td>Текстовый формат данных с парами ключ-значение; ответы API</td><td><a href="https://ru.wikipedia.org/wiki/JSON">ru.wikipedia.org/wiki/JSON</a></td><td><a href="https://en.wikipedia.org/wiki/JSON">en.wikipedia.org/wiki/JSON</a></td></tr>
+<tr><td class="term">YAML</td><td class="en">YAML</td><td>Текстовый формат настроек с отступами; <code>config/sources.yaml</code></td><td><a href="https://ru.wikipedia.org/wiki/YAML">ru.wikipedia.org/wiki/YAML</a></td><td><a href="https://yaml.org/">yaml.org</a></td></tr>
+<tr><td class="term">PDF</td><td class="en">Portable Document Format</td><td>Формат документов; сборники Росстата</td><td><a href="https://ru.wikipedia.org/wiki/PDF">ru.wikipedia.org/wiki/PDF</a></td><td><a href="https://en.wikipedia.org/wiki/PDF">en.wikipedia.org/wiki/PDF</a></td></tr>
+<tr><td class="term">HTML</td><td class="en">HyperText Markup Language</td><td>Язык веб-страниц; таблицы ЦБ</td><td><a href="https://ru.wikipedia.org/wiki/HTML">ru.wikipedia.org/wiki/HTML</a></td><td><a href="https://en.wikipedia.org/wiki/HTML">en.wikipedia.org/wiki/HTML</a></td></tr>
+<tr><td class="term">SPSS (.sav)</td><td class="en">SPSS</td><td>Формат статистического пакета IBM; RLMS-HSE</td><td><a href="https://ru.wikipedia.org/wiki/SPSS">ru.wikipedia.org/wiki/SPSS</a></td><td><a href="https://en.wikipedia.org/wiki/SPSS">en.wikipedia.org/wiki/SPSS</a></td></tr>
+<tr><td class="term">Stata (.dta)</td><td class="en">Stata</td><td>Формат статистического пакета Stata; RLMS-HSE</td><td class="nolink">—</td><td><a href="https://en.wikipedia.org/wiki/Stata">en.wikipedia.org/wiki/Stata</a></td></tr>
+<tr><td class="term">Кодировка</td><td class="en">Character encoding</td><td>Соответствие байтов и символов</td><td><a href="https://ru.wikipedia.org/wiki/Кодировка_символов">ru.wikipedia.org/wiki/Кодировка_символов</a></td><td><a href="https://en.wikipedia.org/wiki/Character_encoding">en.wikipedia.org/wiki/Character_encoding</a></td></tr>
+<tr><td class="term">UTF-8</td><td class="en">UTF-8</td><td>Универсальная кодировка символов; в проекте обязательна</td><td><a href="https://ru.wikipedia.org/wiki/UTF-8">ru.wikipedia.org/wiki/UTF-8</a></td><td><a href="https://en.wikipedia.org/wiki/UTF-8">en.wikipedia.org/wiki/UTF-8</a></td></tr>
+<tr><td class="term">Windows-1251 (CP1251)</td><td class="en">Windows-1251</td><td>Кодировка кириллицы в Windows; часто в старых файлах</td><td><a href="https://ru.wikipedia.org/wiki/Windows-1251">ru.wikipedia.org/wiki/Windows-1251</a></td><td><a href="https://en.wikipedia.org/wiki/Windows-1251">en.wikipedia.org/wiki/Windows-1251</a></td></tr>
+<tr><td class="term">BOM</td><td class="en">Byte order mark</td><td>Метка в начале файла, указывающая кодировку; может ломать чтение CSV</td><td><a href="https://ru.wikipedia.org/wiki/Byte_order_mark">ru.wikipedia.org/wiki/Byte_order_mark</a> ‡</td><td><a href="https://en.wikipedia.org/wiki/Byte_order_mark">en.wikipedia.org/wiki/Byte_order_mark</a></td></tr>
+<tr><td class="term">Разделитель</td><td class="en">Delimiter</td><td>Символ между значениями в CSV; в проекте <code>;</code></td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Длинный формат (long)</td><td class="en">Long format</td><td>Одна строка = одно наблюдение; так устроены <code>data/processed/</code></td><td class="nolink">—</td><td><a href="https://en.wikipedia.org/wiki/Wide_and_narrow_data">en.wikipedia.org/wiki/Wide_and_narrow_data</a> ‡</td></tr>
+<tr><td class="term">Манифест</td><td class="en">Manifest</td><td>Список файлов с контрольными суммами и датами; <code>data/MANIFEST.csv</code> (отключён)</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Контрольная сумма (sha256)</td><td class="en">SHA-256 checksum</td><td>Отпечаток файла; совпадение означает, что файл не изменился</td><td><a href="https://ru.wikipedia.org/wiki/SHA-2">ru.wikipedia.org/wiki/SHA-2</a></td><td><a href="https://en.wikipedia.org/wiki/SHA-2">en.wikipedia.org/wiki/SHA-2</a></td></tr>
+<tr><td class="term">API</td><td class="en">Application Programming Interface</td><td>Интерфейс для запроса данных у сервиса (например, api.hh.ru)</td><td><a href="https://ru.wikipedia.org/wiki/API">ru.wikipedia.org/wiki/API</a></td><td><a href="https://en.wikipedia.org/wiki/API">en.wikipedia.org/wiki/API</a></td></tr>
+<tr><td class="term">Регулярное выражение</td><td class="en">Regular expression (regex)</td><td>Шаблон для поиска текста; используется в проверках имён</td><td><a href="https://ru.wikipedia.org/wiki/Регулярное_выражение">ru.wikipedia.org/wiki/Регулярное_выражение</a> ‡</td><td><a href="https://en.wikipedia.org/wiki/Regular_expression">en.wikipedia.org/wiki/Regular_expression</a></td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>4. Проект: реестр, статусы, процесс</h2>
+<table>
+<tr><th>Термин</th><th>English</th><th>Пояснение</th><th>Подробнее (RU)</th><th>Подробнее (EN)</th></tr>
+<tr><td class="term">Реестр источников</td><td class="en">Source registry</td><td>Файл <code>config/sources.yaml</code>: все источники, один блок на источник</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term"><code>id</code> источника</td><td class="en">Source ID</td><td>Короткий уникальный код источника, например <code>cbr_key_rate</code></td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term"><code>data_2026</code></td><td class="en">Data for 2026</td><td>Статус данных за целевой год: <code>available</code>, <code>N/A</code>, <code>unverified</code></td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term"><code>enabled</code></td><td class="en">Enabled flag</td><td><code>true</code> — источник используется в анализе; <code>false</code> — отключён</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term"><code>N/A</code></td><td class="en">Not available</td><td>Данных за целевой год нет или не опубликованы</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term"><code>unverified</code></td><td class="en">Unverified</td><td>Проверить не удалось; источник отключён до проверки</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term"><code>to_verify</code> / <code>verified</code></td><td class="en">To verify / verified</td><td>Статус проверки адреса и формата источника</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Целевой год</td><td class="en">Target year</td><td>Год данных проекта: <code>target_year</code> в <code>config/project.yaml</code> (2026)</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Этап</td><td class="en">Stage</td><td>Крупный шаг работы (1 — источники, 2 — каркас кода и т. д.)</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Бриф</td><td class="en">Brief</td><td>Краткий документ для преподавателя: что сделано, что проверено, вопросы</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Журнал проверок</td><td class="en">Verification log</td><td>Таблица проверки каждого источника (<code>docs/stage1/source_checks.md</code>)</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Блокер</td><td class="en">Blocker</td><td>Вопрос, без которого этап не закрыть</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Стюард данных</td><td class="en">Data steward</td><td>Отвечает за качество и порядок файлов данных</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Владелец данных</td><td class="en">Data owner</td><td>Отвечает за решение, какие данные использовать</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Сводка-маркер</td><td class="en">Summary marker</td><td>Скрытый комментарий <code>&lt;!-- registry-summary: … --&gt;</code> для проверки согласованности чисел (C10)</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>5. Технологии</h2>
+<table>
+<tr><th>Термин</th><th>English</th><th>Пояснение</th><th>Подробнее (RU)</th><th>Подробнее (EN)</th></tr>
+<tr><td class="term">Python</td><td class="en">Python</td><td>Язык программирования проекта (3.11+)</td><td><a href="https://docs.python.org/ru/3/">docs.python.org/ru/3</a></td><td><a href="https://docs.python.org/3/">docs.python.org/3</a></td></tr>
+<tr><td class="term">Виртуальное окружение (venv)</td><td class="en">Virtual environment</td><td>Изолированная папка с библиотеками проекта (<code>.venv/</code>)</td><td><a href="https://docs.python.org/ru/3/library/venv.html">docs.python.org/ru/3/library/venv</a></td><td><a href="https://docs.python.org/3/library/venv.html">docs.python.org/3/library/venv</a></td></tr>
+<tr><td class="term">pip</td><td class="en">pip</td><td>Установщик библиотек Python</td><td class="nolink">—</td><td><a href="https://pip.pypa.io/en/stable/">pip.pypa.io/en/stable</a></td></tr>
+<tr><td class="term">pandas</td><td class="en">pandas</td><td>Библиотека таблиц: чтение, расчёты, запись</td><td class="nolink">—</td><td><a href="https://pandas.pydata.org/docs/">pandas.pydata.org/docs</a></td></tr>
+<tr><td class="term">NumPy</td><td class="en">NumPy</td><td>Библиотека числовых массивов</td><td class="nolink">—</td><td><a href="https://numpy.org/doc/">numpy.org/doc</a></td></tr>
+<tr><td class="term">PyYAML</td><td class="en">PyYAML</td><td>Чтение и запись YAML</td><td class="nolink">—</td><td><a href="https://pyyaml.org/">pyyaml.org</a></td></tr>
+<tr><td class="term">requests</td><td class="en">requests</td><td>Запросы к веб-сайтам и API</td><td class="nolink">—</td><td><a href="https://requests.readthedocs.io/">requests.readthedocs.io</a></td></tr>
+<tr><td class="term">openpyxl</td><td class="en">openpyxl</td><td>Чтение и запись XLSX</td><td class="nolink">—</td><td><a href="https://openpyxl.readthedocs.io/">openpyxl.readthedocs.io</a></td></tr>
+<tr><td class="term">pyreadstat</td><td class="en">pyreadstat</td><td>Чтение SPSS и Stata</td><td class="nolink">—</td><td><a href="https://github.com/Roche/pyreadstat">github.com/Roche/pyreadstat</a></td></tr>
+<tr><td class="term">lxml</td><td class="en">lxml</td><td>Разбор HTML и XML</td><td class="nolink">—</td><td><a href="https://lxml.de/">lxml.de</a></td></tr>
+<tr><td class="term">pdfplumber</td><td class="en">pdfplumber</td><td>Извлечение текста и таблиц из PDF</td><td class="nolink">—</td><td><a href="https://github.com/jsvine/pdfplumber">github.com/jsvine/pdfplumber</a></td></tr>
+<tr><td class="term">pytest</td><td class="en">pytest</td><td>Библиотека тестов</td><td class="nolink">—</td><td><a href="https://docs.pytest.org/en/stable/">docs.pytest.org/en/stable</a></td></tr>
+<tr><td class="term">Streamlit</td><td class="en">Streamlit</td><td>Библиотека для веб-дашбордов (этап 6)</td><td class="nolink">—</td><td><a href="https://docs.streamlit.io/">docs.streamlit.io</a></td></tr>
+<tr><td class="term">Git</td><td class="en">Git</td><td>Система контроля версий</td><td><a href="https://git-scm.com/book/ru/v2">git-scm.com/book/ru/v2</a></td><td><a href="https://git-scm.com/book/en/v2">git-scm.com/book/en/v2</a></td></tr>
+<tr><td class="term">Ветка (branch)</td><td class="en">Branch</td><td>Отдельная линия изменений в git</td><td><a href="https://git-scm.com/book/ru/v2">git-scm.com/book/ru/v2</a></td><td><a href="https://git-scm.com/book/en/v2">git-scm.com/book/en/v2</a></td></tr>
+<tr><td class="term"><code>main</code></td><td class="en">main</td><td>Основная ветка проекта</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Коммит</td><td class="en">Commit</td><td>Зафиксированное изменение с сообщением</td><td><a href="https://git-scm.com/book/ru/v2">git-scm.com/book/ru/v2</a></td><td><a href="https://git-scm.com/book/en/v2">git-scm.com/book/en/v2</a></td></tr>
+<tr><td class="term">Слияние (merge)</td><td class="en">Merge</td><td>Объединение двух веток</td><td><a href="https://git-scm.com/book/ru/v2">git-scm.com/book/ru/v2</a></td><td><a href="https://git-scm.com/book/en/v2">git-scm.com/book/en/v2</a></td></tr>
+<tr><td class="term">Fast-forward</td><td class="en">Fast-forward merge</td><td>Слияние без новой записи: ветка просто переходит на новый коммит</td><td><a href="https://git-scm.com/book/ru/v2">git-scm.com/book/ru/v2</a></td><td><a href="https://git-scm.com/book/en/v2">git-scm.com/book/en/v2</a></td></tr>
+<tr><td class="term">Origin</td><td class="en">origin</td><td>Имя удалённого репозитория на GitHub</td><td class="nolink">—</td><td><a href="https://git-scm.com/book/en/v2">git-scm.com/book/en/v2</a></td></tr>
+<tr><td class="term">Push / pull</td><td class="en">Push / pull</td><td>Отправка коммитов на сервер / получение с сервера</td><td><a href="https://git-scm.com/book/ru/v2">git-scm.com/book/ru/v2</a></td><td><a href="https://git-scm.com/book/en/v2">git-scm.com/book/en/v2</a></td></tr>
+<tr><td class="term">Pull request (PR)</td><td class="en">Pull request</td><td>Запрос на слияние ветки с проверкой и ревью</td><td><a href="https://docs.github.com/ru/pull-requests">docs.github.com/ru/pull-requests</a></td><td><a href="https://docs.github.com/en/pull-requests">docs.github.com/en/pull-requests</a></td></tr>
+<tr><td class="term"><code>.gitignore</code></td><td class="en">.gitignore</td><td>Файл со списком файлов, которые git не отслеживает</td><td class="nolink">—</td><td><a href="https://git-scm.com/docs/gitignore">git-scm.com/docs/gitignore</a></td></tr>
+<tr><td class="term"><code>.gitattributes</code></td><td class="en">.gitattributes</td><td>Правила git для переводов строк и бинарных файлов (не включён)</td><td class="nolink">—</td><td><a href="https://git-scm.com/docs/gitattributes">git-scm.com/docs/gitattributes</a></td></tr>
+<tr><td class="term">Защита ветки</td><td class="en">Branch protection</td><td>Правила GitHub: запрет прямого push, обязательное ревью (не включено)</td><td><a href="https://docs.github.com/ru/repositories/configuring-branches-and-merges-in-your-repository">docs.github.com/ru/repositories/configuring-branches-and-merges-in-your-repository</a></td><td><a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository">docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository</a></td></tr>
+<tr><td class="term">Токен доступа</td><td class="en">Access token</td><td>Секрет для входа в GitHub без пароля; нельзя хранить в репозитории</td><td><a href="https://docs.github.com/ru/authentication">docs.github.com/ru/authentication</a></td><td><a href="https://docs.github.com/en/authentication">docs.github.com/en/authentication</a></td></tr>
+<tr><td class="term">Shell (терминал)</td><td class="en">Shell</td><td>Программа для текстовых команд (PowerShell, bash, zsh)</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Кодировка и переводы строк (CRLF / LF)</td><td class="en">Line endings</td><td>Разные символы конца строки в Windows и macOS/Linux</td><td class="nolink">—</td><td><a href="https://git-scm.com/docs/gitattributes">git-scm.com/docs/gitattributes</a></td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>6. Командная работа</h2>
+<table>
+<tr><th>Термин</th><th>English</th><th>Пояснение</th><th>Подробнее (RU)</th><th>Подробнее (EN)</th></tr>
+<tr><td class="term">Координатор</td><td class="en">Coordinator</td><td>Ведёт проект, принимает решения и вливает изменения</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Ревьюер</td><td class="en">Reviewer</td><td>Проверяет изменения другого участника</td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">Issue</td><td class="en">Issue</td><td>Задача или вопрос в GitHub Issues</td><td><a href="https://docs.github.com/ru/issues">docs.github.com/ru/issues</a></td><td><a href="https://docs.github.com/en/issues">docs.github.com/en/issues</a></td></tr>
+<tr><td class="term">Ревью кода</td><td class="en">Code review</td><td>Проверка изменений перед слиянием</td><td class="nolink">—</td><td><a href="https://docs.github.com/en/pull-requests">docs.github.com/en/pull-requests</a></td></tr>
+<tr><td class="term">Отключено (disabled)</td><td class="en">Disabled</td><td>Правило описано, но не действует; см. <code>docs/team/</code></td><td class="nolink">—</td><td class="nolink">—</td></tr>
+<tr><td class="term">CI (непрерывная проверка)</td><td class="en">Continuous integration (CI)</td><td>Автоматический запуск проверок при изменениях (GitHub Actions, не включено)</td><td><a href="https://docs.github.com/ru/actions">docs.github.com/ru/actions</a></td><td><a href="https://docs.github.com/en/actions">docs.github.com/en/actions</a></td></tr>
+</table>
+
+<p class="note">Источник: <code>docs/glossary.md</code>. При изменении глоссария обновляйте оба файла.</p>
+
+<script>
+  // Simple live filter over all table rows.
+  const q = document.getElementById('q');
+  const count = document.getElementById('count');
+  const rows = Array.from(document.querySelectorAll('tr')).filter(r => r.querySelector('td'));
+  function applyFilter() {
+    const needle = q.value.trim().toLowerCase();
+    let shown = 0;
+    for (const r of rows) {
+      const match = !needle || r.textContent.toLowerCase().includes(needle);
+      r.classList.toggle('hidden', !match);
+      if (match) shown++;
+    }
+    count.textContent = needle ? `Найдено: ${shown} из ${rows.length}` : `Всего терминов: ${rows.length}`;
+  }
+  q.addEventListener('input', applyFilter);
+  applyFilter();
+</script>
+
+</body>
+</html>
