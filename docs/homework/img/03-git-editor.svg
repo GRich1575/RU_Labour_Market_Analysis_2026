@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="640" height="360" fill="#e9ecef"/>
+  <!-- Git setup window -->
+  <rect x="40" y="16" width="560" height="328" rx="8" fill="#fff" stroke="#8a94a0" stroke-width="2"/>
+  <text x="70" y="56" font-size="19" font-weight="bold" fill="#222">Choosing the default editor used by Git</text>
+  <text x="70" y="78" font-size="13" fill="#666">Which editor would you like Git to use?</text>
+  <!-- dropdown -->
+  <rect x="70" y="92" width="500" height="38" rx="4" fill="#fff" stroke="#8a94a0" stroke-width="2"/>
+  <text x="86" y="117" font-size="15" fill="#222">Use Visual Studio Code as Git's default editor</text>
+  <path d="M540 108 L550 118 L560 108" stroke="#555" stroke-width="2" fill="none"/>
+  <!-- branch name section -->
+  <text x="70" y="186" font-size="15" font-weight="bold" fill="#222">Adjusting the name of the initial branch in new repositories</text>
+  <circle cx="82" cy="222" r="9" fill="#fff" stroke="#2b6cb0" stroke-width="2"/>
+  <circle cx="82" cy="222" r="4.5" fill="#2b6cb0"/>
+  <text x="100" y="227" font-size="15" fill="#222">Let Git decide</text>
+  <circle cx="82" cy="258" r="9" fill="#fff" stroke="#8a94a0" stroke-width="2"/>
+  <text x="100" y="263" font-size="15" fill="#555">Override the default branch name</text>
+  <text x="70" y="318" font-size="13" fill="#555">Keep the default choices on the remaining screens, then click Next / Install.</text>
+  <!-- markers -->
+  <g><circle cx="585" cy="92" r="15" fill="#d62728"/><text x="585" y="93" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="central">1</text></g>
+  <g><circle cx="58" cy="222" r="15" fill="#d62728"/><text x="58" y="223" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="central">2</text></g>
+</svg>
