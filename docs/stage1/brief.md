@@ -18,6 +18,25 @@
 
 Сводка по 15 источникам: проверено 1; частично 5; неверный адрес 1; не проверено (блок/недоступно) 8.
 
+## Источники и ссылки
+- Обследование рабочей силы (ОРС) (Росстат) - https://www.fedstat.ru/indicator/43062 (ЕМИСС, уровень безработицы по МОТ; из поиска, не открыто); методология: http://ps.rosstat.gov.ru/unemployment ; паспорт показателя (PDF): https://59.rosstat.gov.ru/storage/mediabank/%D0%9F%D0%B0%D1%81%D0%BF%D0%BE%D1%80%D1%82%20%D0%BF%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8F%20%E2%84%9619%20%D0%A3%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C%20%D0%B1%D0%B5%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B8%D1%86%D1%8B%20%D0%BF%D0%BE%20%D0%BC%D0%B5%D1%82%D0%BE%D0%B4%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8%20%D0%9C%D0%9E%D0%A2.pdf
+- Неполная занятость и простои (Росстат) - https://rosstat.gov.ru/
+- Индекс потребительских цен (ИПЦ) (Росстат) - https://rosstat.gov.ru/ ; ЕМИСС: https://www.fedstat.ru/
+- Малое и среднее предпринимательство (МСП) (Росстат) - https://rosstat.gov.ru/
+- Зарегистрированная безработица (Роструд) - https://rostrud.gov.ru/
+- Ключевая ставка (Банк России) - https://www.cbr.ru/hd_base/KeyRate/?UniDbQuery.Posted=True&UniDbQuery.From=01.01.2026&UniDbQuery.To=17.11.2026 (проверено, данные 2026)
+- Мониторинг предприятий (Банк России) - https://www.cbr.ru/
+- Краткий обзор рынка труда hh.ru (hh-индекс) - https://stats.hh.ru/api/v1/monthly-report/f-1af62a02-5e78-46d4-9353-6b70e414b65c (январь 2026; из поиска, не открыто); архив обзоров: https://hh.ru/article/26641
+- Вакансии и резюме hh.ru по профессиям (API) - https://api.hh.ru/vacancies
+- СберИндекс - https://sberindex.ru/
+- RLMS-HSE (ВШЭ) - https://www.hse.ru/rlms/
+- Индексы занятости по отраслям (ИСИЭЗ ВШЭ) - https://www.hse.ru/data/2026/02/25/183254327/Composite_indice_4Q2025.pdf (пример выпуска; страница hse.ru/isiez/ — 404)
+- Аналитика ЦеТИ - https://cetr.ru/
+- Обзоры ЦМАКП - https://cmasf.ru/papers.html
+- ILOSTAT / OECD - https://ilostat.ilo.org/ ; https://data.oecd.org/
+
+Ссылки проверены из среды разработки только частично (см. `source_checks.md`).
+
 ## Новый кандидат (требует решения)
 - hh.ru «интерактивная карта рынка труда» (https://hh.ru/article/304204): 84 региона, 28 сфер, ежемесячно с 2015 г. По описанию в поиске — может закрыть цель 2 (сегментация по сферам), если ОРС не даёт безработицу по профессиям. Не открыт.
 
