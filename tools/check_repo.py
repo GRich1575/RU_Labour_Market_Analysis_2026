@@ -39,11 +39,13 @@ SAMPLE_MAX_ROWS = 200
 SAMPLE_MAX_BYTES = 1_048_576
 
 SECRET_PATTERNS = [
-    re.compile(r"ghp_[A-Za-z0-9]{36}"),
-    re.compile(r"github_pat_"),
+    re.compile(r"gh[pousr]_[A-Za-z0-9]{36}"),
+    re.compile(r"github_pat_[A-Za-z0-9_]{20,}"),
+    re.compile(r"sk-ant-[A-Za-z0-9_\-]{20,}"),
+    re.compile(r"AIza[0-9A-Za-z_\-]{35}"),
     re.compile(r"AKIA[0-9A-Z]{16}"),
     re.compile(r"-----BEGIN .*PRIVATE KEY-----"),
-    re.compile(r"(?i)\b(password|passwd|api[_-]?key|token)\s*[:=]\s*[\"']?[A-Za-z0-9_\-+/=.]{12,}"),
+    re.compile(r"(?i)\b(password|passwd|api[_-]?key|token)\s*[:=]\s*[\"']?[^\s\"']{12,}"),
 ]
 ABS_PATH_RE = re.compile(r"[A-Za-z]:\\|/Users/")
 # [текст](цель) или [текст](цель "заголовок"); цель может содержать пробелы
@@ -74,19 +76,18 @@ def load_exceptions():
 
 
 def is_excepted(path, line, rule, exceptions):
-    """Исключение: тот же файл, то же правило и строка содержит фрагмент `contains`."""
+    """Исключение: тот же файл, то же правило, строка совпадает с полем `line` целиком."""
     try:
         lines = file_lines(path)
     except (OSError, UnicodeDecodeError):
         return False
     if not 1 <= line <= len(lines):
         return False
-    text = lines[line - 1]
+    text = lines[line - 1].strip()
     return any(
         ex.get("file") == path
         and ex.get("rule") == rule
-        and ex.get("contains", "")
-        and ex["contains"] in text
+        and ex.get("line") == text
         for ex in exceptions
     )
 
@@ -99,18 +100,14 @@ def git_files():
     return [p for p in out.split("\0") if p]
 
 
-def read_text(rel):
-    return (ROOT / rel).read_text(encoding="utf-8")
-
-
-def read_lines(rel):
-    return read_text(rel).splitlines()
-
-
 @functools.lru_cache(maxsize=None)
+def _file_lines(root, rel):
+    return tuple((Path(root) / rel).read_text(encoding="utf-8").splitlines())
+
+
 def file_lines(rel):
-    """Строки файла, читается один раз за запуск (кэш по пути)."""
-    return tuple(read_lines(rel))
+    """Строки файла; каждый файл читается один раз за запуск (кэш по корню и пути)."""
+    return _file_lines(str(ROOT), rel)
 
 
 def line_of(lines, pattern):
@@ -123,7 +120,7 @@ def line_of(lines, pattern):
 
 def load_yaml(rel):
     try:
-        return yaml.safe_load("\n".join(read_lines(rel))) or {}
+        return yaml.safe_load("\n".join(file_lines(rel))) or {}
     except (yaml.YAMLError, OSError) as exc:
         report(rel, 1, f"не читается как YAML: {exc}")
         return None
@@ -140,7 +137,7 @@ def check_sources():
     """C1 схема реестра, C2 правило 2026. Возвращает счётчики для C10."""
     rel = "config/sources.yaml"
     set_rule("C1")
-    lines = read_lines(rel)
+    lines = file_lines(rel)
     data = load_yaml(rel)
     counts = {"total": 0, "available": 0, "enabled": 0, "na": 0, "unverified": 0}
     if data is None:
@@ -198,7 +195,7 @@ def check_project():
     rel = "config/project.yaml"
     data = load_yaml(rel)
     if data is not None and not isinstance(data.get("target_year"), int):
-        report(rel, line_of(read_lines(rel), r"target_year"), "target_year должен быть целым числом")
+        report(rel, line_of(file_lines(rel), r"target_year"), "target_year должен быть целым числом")
 
 
 # C10 ------------------------------------------------------------------------
@@ -209,7 +206,7 @@ def check_summaries(counts):
         return
     for rel in ["PROGRESS.md", "docs/stage1/brief.md"]:
         try:
-            text = read_text(rel)
+            text = "\n".join(file_lines(rel))
         except OSError:
             report(rel, 1, "файл не найден (нужен для сверки сводки реестра)")
             continue
@@ -277,12 +274,12 @@ def check_samples(files):
 
 # C6 ------------------------------------------------------------------------
 
-def check_manifest():
+def check_manifest(files):
     set_rule("C6")
     rel = "data/MANIFEST.csv"
     path = ROOT / rel
-    if not path.exists():
-        return
+    if rel not in files or not path.exists():
+        return  # проверяется только файл под контролем git
     with path.open(encoding="utf-8", newline="") as fh:
         rows = list(csv.reader(fh))
     if not rows or rows[0] != MANIFEST_HEADER:
@@ -367,7 +364,7 @@ def main():
     check_summaries(counts)
     check_not_in_git(files)
     check_samples(files)
-    check_manifest()
+    check_manifest(files)
     check_secrets(files)
     check_absolute_paths(files)
     check_links(files)

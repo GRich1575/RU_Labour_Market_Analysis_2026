@@ -55,20 +55,20 @@ def repo(tmp_path, monkeypatch):
     """Временный корень репозитория с валидным минимумом файлов."""
     monkeypatch.setattr(cr, "ROOT", tmp_path)
     monkeypatch.setattr(cr, "violations", [])
-    cr.file_lines.cache_clear()
+    cr._file_lines.cache_clear()
     write(tmp_path, "config/project.yaml", "target_year: 2026\n")
     write(tmp_path, "config/sources.yaml", GOOD_SOURCE)
     write(tmp_path, "PROGRESS.md", f"# P\n{GOOD_SUMMARY}\n")
     write(tmp_path, "docs/stage1/brief.md", f"# B\n{GOOD_SUMMARY}\n")
     yield tmp_path
-    cr.file_lines.cache_clear()
+    cr._file_lines.cache_clear()
 
 
 def write(root, rel, text):
     path = root / rel
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8")
-    cr.file_lines.cache_clear()
+    cr._file_lines.cache_clear()
     return rel
 
 
@@ -158,14 +158,20 @@ SHA = "a" * 64
 
 def test_manifest_blank_line_is_ignored(repo):
     write(repo, "data/MANIFEST.csv", HEADER + f"x.xlsx,rosstat_orc,2026,{SHA},10,2026-11-17,u,,active,\n\n")
-    cr.check_manifest()
+    cr.check_manifest(["data/MANIFEST.csv"])
     assert cr.violations == []
 
 
 def test_manifest_bad_sha_is_c6(repo):
     write(repo, "data/MANIFEST.csv", HEADER + "x.xlsx,rosstat_orc,2026,XYZ,10,2026-11-17,u,,active,\n")
-    cr.check_manifest()
+    cr.check_manifest(["data/MANIFEST.csv"])
     assert "C6" in rules_found()
+
+
+def test_untracked_manifest_is_not_checked(repo):
+    write(repo, "data/MANIFEST.csv", HEADER + "x.xlsx,rosstat_orc,2026,XYZ,10,2026-11-17,u,,active,\n")
+    cr.check_manifest([])  # файла нет в git — CI его не проверяет
+    assert cr.violations == []
 
 
 # C7 -------------------------------------------------------------------------
@@ -174,7 +180,11 @@ def test_manifest_bad_sha_is_c6(repo):
     "password: hunter2hunter2x",
     'api_key="abcdef123456789"',
     "ghp_" + "a" * 36,
+    "gho_" + "a" * 36,
+    "sk-ant-" + "a" * 25,
+    "AIza" + "a" * 35,
     "-----BEGIN RSA PRIVATE KEY-----",
+    "password: P@ssw0rd!2026xy",
 ])
 def test_secret_patterns_match(line):
     assert any(rx.search(line) for rx in cr.SECRET_PATTERNS)
@@ -229,10 +239,15 @@ def test_link_with_title_and_encoded_space_resolves(repo):
 
 def test_exception_matches_only_its_rule(repo):
     rel = write(repo, "docs/a.md", "например: cd C:\\Users\\x\n")
-    cr.violations.append((rel, 1, "x", "C9"))
-    exc = [{"file": rel, "rule": "C8", "contains": "например: cd C:"}]
+    exc = [{"file": rel, "rule": "C8", "line": "например: cd C:\\Users\\x"}]
     assert cr.is_excepted(rel, 1, "C8", exc) is True
     assert cr.is_excepted(rel, 1, "C9", exc) is False
+
+
+def test_exception_needs_whole_line(repo):
+    rel = write(repo, "docs/a.md", "например: cd C:\\Users\\x and [y](missing.md)\n")
+    exc = [{"file": rel, "rule": "C8", "line": "например: cd C:"}]
+    assert cr.is_excepted(rel, 1, "C8", exc) is False
 
 
 # Whole-repo gate ------------------------------------------------------------
