@@ -10,6 +10,7 @@
 """
 
 import csv
+import functools
 import re
 import subprocess
 import sys
@@ -42,7 +43,7 @@ SECRET_PATTERNS = [
     re.compile(r"github_pat_"),
     re.compile(r"AKIA[0-9A-Z]{16}"),
     re.compile(r"-----BEGIN .*PRIVATE KEY-----"),
-    re.compile(r"(?i)(password|passwd|api[_-]?key|token)\s*[:=]\s*\S+"),
+    re.compile(r"(?i)\b(password|passwd|api[_-]?key|token)\s*[:=]\s*[\"']?[A-Za-z0-9_\-+/=.]{12,}"),
 ]
 ABS_PATH_RE = re.compile(r"[A-Za-z]:\\|/Users/")
 # [текст](цель) или [текст](цель "заголовок"); цель может содержать пробелы
@@ -72,14 +73,12 @@ def load_exceptions():
     return data.get("exceptions") or []
 
 
-def is_excepted(path, line, rule, exceptions, cache):
+def is_excepted(path, line, rule, exceptions):
     """Исключение: тот же файл, то же правило и строка содержит фрагмент `contains`."""
-    if path not in cache:
-        try:
-            cache[path] = (ROOT / path).read_text(encoding="utf-8").splitlines()
-        except (OSError, UnicodeDecodeError):
-            cache[path] = []
-    lines = cache[path]
+    try:
+        lines = file_lines(path)
+    except (OSError, UnicodeDecodeError):
+        return False
     if not 1 <= line <= len(lines):
         return False
     text = lines[line - 1]
@@ -106,6 +105,12 @@ def read_text(rel):
 
 def read_lines(rel):
     return read_text(rel).splitlines()
+
+
+@functools.lru_cache(maxsize=None)
+def file_lines(rel):
+    """Строки файла, читается один раз за запуск (кэш по пути)."""
+    return tuple(read_lines(rel))
 
 
 def line_of(lines, pattern):
@@ -304,10 +309,10 @@ def check_secrets(files):
     set_rule("C7")
     for p in files:
         try:
-            text = read_text(p)
+            lines = file_lines(p)
         except (UnicodeDecodeError, OSError):
             continue  # бинарные файлы
-        for n, line in enumerate(text.splitlines(), start=1):
+        for n, line in enumerate(lines, start=1):
             for rx in SECRET_PATTERNS:
                 if rx.search(line):
                     report(p, n, "возможный секрет (токен, ключ, пароль)")
@@ -322,7 +327,7 @@ def check_absolute_paths(files):
         if not p.endswith((".md", ".py", ".yaml")) or p.startswith("docs/team/"):
             continue
         try:
-            lines = read_lines(p)
+            lines = file_lines(p)
         except (UnicodeDecodeError, OSError):
             continue
         for n, line in enumerate(lines, start=1):
@@ -339,7 +344,7 @@ def check_links(files):
             continue
         base = (ROOT / p).parent
         try:
-            lines = read_lines(p)
+            lines = file_lines(p)
         except (UnicodeDecodeError, OSError):
             continue
         for n, line in enumerate(lines, start=1):
@@ -368,10 +373,9 @@ def main():
     check_links(files)
 
     exceptions = load_exceptions()
-    cache = {}
     left = [
         v for v in violations
-        if not is_excepted(v[0], v[1], v[3], exceptions, cache)
+        if not is_excepted(v[0], v[1], v[3], exceptions)
     ]
     for path, line, message, rule in left:
         print(f"{path}:{line}: [{rule}] {message}")
