@@ -304,10 +304,14 @@ def check_links(files):
                     report(p, n, f"битая ссылка: {target}")
 
 
+# Сам скрипт и файл исключений описывают шаблоны, поэтому не сканируются (C7–C9).
+SELF_FILES = {"tools/check_repo.py", "tools/check_exceptions.yaml"}
+
+
 def main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")  # кириллица в консоли Windows
-    files = git_files()
+    files = [f for f in git_files() if f not in SELF_FILES]
     counts = check_sources()
     check_project()
     check_summaries(counts)
