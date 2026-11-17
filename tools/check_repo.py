@@ -50,8 +50,8 @@ ABS_PATH_RE = re.compile(r"[A-Za-z]:\\|/Users/")
 LINK_RE = re.compile(r"\]\(([^)]+?)(?:\s+\"[^\"]*\")?\)")
 SUMMARY_RE = re.compile(r"<!--\s*registry-summary:\s*(.*?)\s*-->")
 
-# Сам скрипт и файл исключений описывают шаблоны, поэтому не сканируются (C7–C9).
-SELF_FILES = {"tools/check_repo.py", "tools/check_exceptions.yaml"}
+# Сам скрипт, файл исключений и тесты содержат примеры шаблонов, поэтому не сканируются (C7–C9).
+SELF_FILES = {"tools/check_repo.py", "tools/check_exceptions.yaml", "tests/test_check_repo.py"}
 
 violations = []   # (путь, строка, сообщение, правило)
 current_rule = ["C0"]
