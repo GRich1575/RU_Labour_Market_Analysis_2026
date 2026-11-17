@@ -24,10 +24,10 @@ Updated: 2026-11-17 | Branch: feature/framework | Текущий этап: 1 —
 - Окружение: `requirements.txt` ставится в `.venv` без ошибок (pandas 3.1.1, numpy 2.5.5, lxml, pdfplumber, pytest 9.2).
 - Не проверено на macOS / Linux: команды шпаргалок и venv.
 - Пошаговая установка (RU/EN, схемы в `docs/homework/img/`, не реальные скриншоты): `docs/homework/setup_guide_ru.html`, `setup_guide_en.html`. Проверено рендером в Chrome (headless), все картинки подключены; macOS/Linux без картинок.
-- HTML-версия порядка чтения: `docs/START_HERE.html` (ссылки проверены, в браузере не открывалась; GitHub показывает .html как код — нужен htmlpreview/Pages).
+- HTML-версия порядка чтения: `docs/START_HERE.html` (ссылки проверены; GitHub показывает .html как код — нужен htmlpreview/Pages).
 
 ## Коммиты
-`9234478` этап 1 · `3fb8e17` · `3f35e35` (число источников) · `d70e945` (prerequisites) · `54e6286` (requirements, README, шпаргалки) · `64344d9` (PROGRESS) · `ce76ec8` (START_HERE.html; promoted to main 2026-11-17).
+`9234478` этап 1 · `3fb8e17` · `3f35e35` (число источников) · `d70e945` (prerequisites) · `54e6286` (requirements, README, шпаргалки) · `64344d9` (PROGRESS) · `ce76ec8` (START_HERE.html; в main) · CI-ветка: `014122d`…`7ee5945` (checks.yml, PR template, check_repo.py + тесты; PR открыт).
 Ветки feature/framework и main запушены в origin; работаем в feature/framework.
 Роли: один участник — владелец проекта, координатор, владелец данных и стюард. Добавление участников — позже.
 

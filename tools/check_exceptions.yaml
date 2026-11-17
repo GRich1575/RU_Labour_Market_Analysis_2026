@@ -1,0 +1,16 @@
+# Исключения для tools/check_repo.py (см. docs/team/automation_design.md, п. 6).
+# Исключение действует, только если путь совпадает и текст строки содержит `contains`.
+# Каждое исключение проходит ревью как любой код. Без причины и даты не добавлять.
+
+exceptions:
+  - file: docs/team/automation_design.md
+    line: "**C7:** шаблоны для diff (только добавленные строки): `ghp_[A-Za-z0-9]{36}`, `github_pat_`, `AKIA[0-9A-Z]{16}`, `-----BEGIN .* PRIVATE KEY-----`, `(?i)(password|passwd|api[_-]?key|token)\\s*[:=]\\s*\\S+`. Для полноты предпочтительно готовый сканер (gitleaks) — см. п. 5."
+    rule: C7
+    reason: описание шаблона секрета в документации, не секрет
+    date: 2026-11-17
+
+  - file: docs/prerequisites.md
+    line: "cd <путь-к-репозиторию>          # например: cd C:\\Users\\<имя>\\Projects\\RU_Labour_Market_Analysis_2026"
+    rule: C8
+    reason: пример пути в инструкции установки для Windows (проверить при ревью)
+    date: 2026-11-17
