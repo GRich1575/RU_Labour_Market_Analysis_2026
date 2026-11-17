@@ -14,6 +14,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from urllib.parse import unquote
 
 import yaml
 
@@ -44,14 +45,23 @@ SECRET_PATTERNS = [
     re.compile(r"(?i)(password|passwd|api[_-]?key|token)\s*[:=]\s*\S+"),
 ]
 ABS_PATH_RE = re.compile(r"[A-Za-z]:\\|/Users/")
-LINK_RE = re.compile(r"\]\(([^)\s]+)\)")
+# [текст](цель) или [текст](цель "заголовок"); цель может содержать пробелы
+LINK_RE = re.compile(r"\]\(([^)]+?)(?:\s+\"[^\"]*\")?\)")
 SUMMARY_RE = re.compile(r"<!--\s*registry-summary:\s*(.*?)\s*-->")
 
-violations = []
+# Сам скрипт и файл исключений описывают шаблоны, поэтому не сканируются (C7–C9).
+SELF_FILES = {"tools/check_repo.py", "tools/check_exceptions.yaml"}
+
+violations = []   # (путь, строка, сообщение, правило)
+current_rule = ["C0"]
+
+
+def set_rule(code):
+    current_rule[0] = code
 
 
 def report(path, line, message):
-    violations.append((str(path), int(line), message))
+    violations.append((str(path), int(line), message, current_rule[0]))
 
 
 def load_exceptions():
@@ -62,14 +72,22 @@ def load_exceptions():
     return data.get("exceptions") or []
 
 
-def is_excepted(path, line, exceptions):
-    """Исключение: тот же файл и строка содержит фрагмент `contains`."""
-    try:
-        text = (ROOT / path).read_text(encoding="utf-8").splitlines()[line - 1]
-    except (OSError, IndexError, UnicodeDecodeError):
+def is_excepted(path, line, rule, exceptions, cache):
+    """Исключение: тот же файл, то же правило и строка содержит фрагмент `contains`."""
+    if path not in cache:
+        try:
+            cache[path] = (ROOT / path).read_text(encoding="utf-8").splitlines()
+        except (OSError, UnicodeDecodeError):
+            cache[path] = []
+    lines = cache[path]
+    if not 1 <= line <= len(lines):
         return False
+    text = lines[line - 1]
     return any(
-        ex.get("file") == path and ex.get("contains", "") and ex["contains"] in text
+        ex.get("file") == path
+        and ex.get("rule") == rule
+        and ex.get("contains", "")
+        and ex["contains"] in text
         for ex in exceptions
     )
 
@@ -82,8 +100,12 @@ def git_files():
     return [p for p in out.split("\0") if p]
 
 
+def read_text(rel):
+    return (ROOT / rel).read_text(encoding="utf-8")
+
+
 def read_lines(rel):
-    return (ROOT / rel).read_text(encoding="utf-8").splitlines()
+    return read_text(rel).splitlines()
 
 
 def line_of(lines, pattern):
@@ -102,11 +124,17 @@ def load_yaml(rel):
         return None
 
 
+def in_set(value, allowed):
+    """Безопасная проверка: нестроковые значения (списки, словари) не совпадают."""
+    return isinstance(value, str) and value in allowed
+
+
 # C1, C2, C10 counts ---------------------------------------------------------
 
 def check_sources():
     """C1 схема реестра, C2 правило 2026. Возвращает счётчики для C10."""
     rel = "config/sources.yaml"
+    set_rule("C1")
     lines = read_lines(rel)
     data = load_yaml(rel)
     counts = {"total": 0, "available": 0, "enabled": 0, "na": 0, "unverified": 0}
@@ -131,19 +159,22 @@ def check_sources():
             report(rel, where, f"id `{sid}`: допустимы строчные латинские буквы, цифры и `_`")
         elif sid in seen_ids:
             report(rel, where, f"id `{sid}` повторяется")
-        seen_ids.add(sid)
+        if isinstance(sid, str):
+            seen_ids.add(sid)
 
         status = src.get("status")
-        if status not in STATUS_VALUES:
+        if not in_set(status, STATUS_VALUES):
             report(rel, where, f"{sid}: status `{status}` (допустимо: to_verify, verified)")
         d26 = src.get("data_2026")
-        if d26 not in DATA_2026_VALUES:
+        if not in_set(d26, DATA_2026_VALUES):
             report(rel, where, f"{sid}: data_2026 `{d26}` (допустимо: available, N/A, unverified)")
         enabled = src.get("enabled")
         if not isinstance(enabled, bool):
             report(rel, where, f"{sid}: enabled должен быть true или false")
         elif enabled and d26 != "available":
+            set_rule("C2")
             report(rel, where, f"{sid}: enabled: true, но data_2026 не `available` (правило 2026)")
+            set_rule("C1")
 
         counts["total"] += 1
         if d26 == "available":
@@ -158,6 +189,7 @@ def check_sources():
 
 
 def check_project():
+    set_rule("C1")
     rel = "config/project.yaml"
     data = load_yaml(rel)
     if data is not None and not isinstance(data.get("target_year"), int):
@@ -167,10 +199,15 @@ def check_project():
 # C10 ------------------------------------------------------------------------
 
 def check_summaries(counts):
+    set_rule("C10")
     if counts is None:
         return
     for rel in ["PROGRESS.md", "docs/stage1/brief.md"]:
-        text = (ROOT / rel).read_text(encoding="utf-8")
+        try:
+            text = read_text(rel)
+        except OSError:
+            report(rel, 1, "файл не найден (нужен для сверки сводки реестра)")
+            continue
         m = SUMMARY_RE.search(text)
         if not m:
             report(rel, 1, "нет маркера <!-- registry-summary: ... -->")
@@ -187,6 +224,7 @@ def check_summaries(counts):
 # C3 ------------------------------------------------------------------------
 
 def check_not_in_git(files):
+    set_rule("C3")
     for p in files:
         if not (p.startswith("data/raw/") or p.startswith("data/processed/")):
             continue
@@ -197,16 +235,19 @@ def check_not_in_git(files):
 
 # C4, C5 ---------------------------------------------------------------------
 
-def check_samples():
-    base = ROOT / "data" / "samples"
-    if not base.exists():
-        return
-    for path in sorted(base.rglob("*")):
-        if not path.is_file():
+def check_samples(files):
+    """Только файлы под контролем git: то же, что проверяет CI."""
+    for rel in files:
+        if not rel.startswith("data/samples/"):
             continue
-        rel = path.relative_to(ROOT).as_posix()
+        path = ROOT / rel
+        set_rule("C4")
         if not SAMPLE_NAME_RE.match(path.name):
             report(rel, 1, "имя образца не по шаблону <id>_sample_<период>.csv")
+        set_rule("C5")
+        if not path.is_file():
+            report(rel, 1, "файл есть в git, но отсутствует на диске")
+            continue
         raw = path.read_bytes()
         if len(raw) > SAMPLE_MAX_BYTES:
             report(rel, 1, f"размер {len(raw)} байт > {SAMPLE_MAX_BYTES}")
@@ -232,6 +273,7 @@ def check_samples():
 # C6 ------------------------------------------------------------------------
 
 def check_manifest():
+    set_rule("C6")
     rel = "data/MANIFEST.csv"
     path = ROOT / rel
     if not path.exists():
@@ -242,6 +284,8 @@ def check_manifest():
         report(rel, 1, "заголовок не совпадает с ожидаемым")
         return
     for n, row in enumerate(rows[1:], start=2):
+        if not row:
+            continue  # пустая строка между записями — не запись
         if len(row) != len(MANIFEST_HEADER):
             report(rel, n, f"число полей {len(row)}, ожидается {len(MANIFEST_HEADER)}")
             continue
@@ -257,10 +301,10 @@ def check_manifest():
 # C7 ------------------------------------------------------------------------
 
 def check_secrets(files):
+    set_rule("C7")
     for p in files:
-        path = ROOT / p
         try:
-            text = path.read_text(encoding="utf-8")
+            text = read_text(p)
         except (UnicodeDecodeError, OSError):
             continue  # бинарные файлы
         for n, line in enumerate(text.splitlines(), start=1):
@@ -273,11 +317,12 @@ def check_secrets(files):
 # C8 ------------------------------------------------------------------------
 
 def check_absolute_paths(files):
+    set_rule("C8")
     for p in files:
         if not p.endswith((".md", ".py", ".yaml")) or p.startswith("docs/team/"):
             continue
         try:
-            lines = (ROOT / p).read_text(encoding="utf-8").splitlines()
+            lines = read_lines(p)
         except (UnicodeDecodeError, OSError):
             continue
         for n, line in enumerate(lines, start=1):
@@ -288,24 +333,24 @@ def check_absolute_paths(files):
 # C9 ------------------------------------------------------------------------
 
 def check_links(files):
+    set_rule("C9")
     for p in files:
         if not p.endswith(".md"):
             continue
         base = (ROOT / p).parent
-        lines = (ROOT / p).read_text(encoding="utf-8").splitlines()
+        try:
+            lines = read_lines(p)
+        except (UnicodeDecodeError, OSError):
+            continue
         for n, line in enumerate(lines, start=1):
             for target in LINK_RE.findall(line):
                 if target.startswith(("http://", "https://", "mailto:", "#")):
                     continue
-                target = target.split("#", 1)[0]
+                target = unquote(target.split("#", 1)[0])
                 if not target:
                     continue
                 if not (base / target).exists():
                     report(p, n, f"битая ссылка: {target}")
-
-
-# Сам скрипт и файл исключений описывают шаблоны, поэтому не сканируются (C7–C9).
-SELF_FILES = {"tools/check_repo.py", "tools/check_exceptions.yaml"}
 
 
 def main():
@@ -316,16 +361,20 @@ def main():
     check_project()
     check_summaries(counts)
     check_not_in_git(files)
-    check_samples()
+    check_samples(files)
     check_manifest()
     check_secrets(files)
     check_absolute_paths(files)
     check_links(files)
 
     exceptions = load_exceptions()
-    left = [v for v in violations if not is_excepted(v[0], v[1], exceptions)]
-    for path, line, message in left:
-        print(f"{path}:{line}: {message}")
+    cache = {}
+    left = [
+        v for v in violations
+        if not is_excepted(v[0], v[1], v[3], exceptions, cache)
+    ]
+    for path, line, message, rule in left:
+        print(f"{path}:{line}: [{rule}] {message}")
     if left:
         print(f"\ncheck_repo: нарушений: {len(left)}")
         return 1

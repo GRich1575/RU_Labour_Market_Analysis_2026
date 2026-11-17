@@ -34,7 +34,7 @@ exceptions:
     date: 2026-11-17
 
   - file: docs/prerequisites.md
-    contains: "C:\\"
+    contains: "например: cd C:"
     rule: C8
     reason: пример пути в инструкции установки для Windows (проверить при ревью)
     date: 2026-11-17
