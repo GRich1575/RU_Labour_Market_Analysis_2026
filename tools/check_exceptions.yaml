@@ -9,38 +9,8 @@ exceptions:
     reason: описание шаблона секрета в документации, не секрет
     date: 2026-11-17
 
-  - file: .github/pull_request_template.md
-    line: "- [ ] Пути относительные (без `C:\\` и `D:\\`)"
-    rule: C8
-    reason: описание правила пути, пример запрещённого написания
-    date: 2026-11-17
-
-  - file: docs/START_HERE.md
-    line: "4. **Пути — относительные.** В документах и коде не используем `C:\\...` или `D:\\...`. Команды выполняем из корня репозитория."
-    rule: C8
-    reason: описание правила пути, пример запрещённого написания
-    date: 2026-11-17
-
   - file: docs/prerequisites.md
     line: "cd <путь-к-репозиторию>          # например: cd C:\\Users\\<имя>\\Projects\\RU_Labour_Market_Analysis_2026"
     rule: C8
     reason: пример пути в инструкции установки для Windows (проверить при ревью)
-    date: 2026-11-17
-
-  - file: docs/stage1/issues.md
-    line: "- Абсолютный путь `D:\\Projects\\...` попал в `docs/prerequisites.md` — исправлено по замечанию."
-    rule: C8
-    reason: запись журнала о найденном и исправленном абсолютном пути, пример
-    date: 2026-11-17
-
-  - file: docs/cheatsheets/markdown.md
-    line: "[текст](docs/prerequisites.md)"
-    rule: C9
-    reason: пример синтаксиса ссылки в шпаргалке
-    date: 2026-11-17
-
-  - file: docs/cheatsheets/markdown.md
-    line: "![подпись](path/to/image.png)"
-    rule: C9
-    reason: пример синтаксиса картинки в шпаргалке
     date: 2026-11-17

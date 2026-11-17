@@ -252,6 +252,18 @@ def test_exception_needs_whole_line(repo):
 
 # Whole-repo gate ------------------------------------------------------------
 
+def test_code_spans_and_fences_are_not_scanned(repo):
+    rel = write(repo, "docs/a.md",
+                "Пример `cd D:\\Projects\\x` и `[ссылка](missing.md)` в коде.\n"
+                "```\n"
+                "cd D:\\Projects\\y\n"
+                "[z](missing2.md)\n"
+                "```\n")
+    cr.check_absolute_paths([rel])
+    cr.check_links([rel])
+    assert cr.violations == []
+
+
 def test_real_repository_passes():
     result = subprocess.run(
         [sys.executable, str(REPO / "tools" / "check_repo.py")],

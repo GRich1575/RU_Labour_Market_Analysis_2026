@@ -318,16 +318,28 @@ def check_secrets(files):
 
 # C8 ------------------------------------------------------------------------
 
+def prose_lines(rel):
+    """Строки текста: без блоков ``` и без содержимого `код`. Номера строк сохраняются."""
+    in_fence = False
+    for n, line in enumerate(file_lines(rel), start=1):
+        if line.lstrip().startswith("```"):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        yield n, re.sub(r"`[^`]*`", "", line)
+
+
 def check_absolute_paths(files):
     set_rule("C8")
     for p in files:
         if not p.endswith((".md", ".py", ".yaml")) or p.startswith("docs/team/"):
             continue
         try:
-            lines = file_lines(p)
+            lines = list(prose_lines(p))
         except (UnicodeDecodeError, OSError):
             continue
-        for n, line in enumerate(lines, start=1):
+        for n, line in lines:
             if ABS_PATH_RE.search(line):
                 report(p, n, "абсолютный путь (используйте относительные)")
 
@@ -341,10 +353,10 @@ def check_links(files):
             continue
         base = (ROOT / p).parent
         try:
-            lines = file_lines(p)
+            lines = list(prose_lines(p))
         except (UnicodeDecodeError, OSError):
             continue
-        for n, line in enumerate(lines, start=1):
+        for n, line in lines:
             for target in LINK_RE.findall(line):
                 if target.startswith(("http://", "https://", "mailto:", "#")):
                     continue
