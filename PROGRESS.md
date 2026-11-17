@@ -1,6 +1,6 @@
 # PROGRESS — RU Labour Market Analysis 2026
 
-Updated: 2026-11-17 | Branch: feature/framework | Текущий этап: 1 — источники данных (rework needed)
+Updated: 2026-11-17 | Branch: main (`d5cf134`) | Текущий этап: 1 — источники данных (rework needed)
 
 ## Дорожная карта (предложенная; этапы 3–7 уточняются)
 | Этап | Содержание | Статус | Комментарий |
@@ -27,8 +27,8 @@ Updated: 2026-11-17 | Branch: feature/framework | Текущий этап: 1 —
 - HTML-версия порядка чтения: `docs/START_HERE.html` (ссылки проверены; GitHub показывает .html как код — нужен htmlpreview/Pages).
 
 ## Коммиты
-`9234478` этап 1 · `3fb8e17` · `3f35e35` (число источников) · `d70e945` (prerequisites) · `54e6286` (requirements, README, шпаргалки) · `64344d9` (PROGRESS) · `ce76ec8` (START_HERE.html; в main) · CI-ветка: `014122d`…`7ee5945` (checks.yml, PR template, check_repo.py + тесты; PR открыт).
-Ветки feature/framework и main запушены в origin; работаем в feature/framework.
+`9234478` этап 1 · `3fb8e17` · `3f35e35` (число источников) · `d70e945` (prerequisites) · `54e6286` (requirements, README, шпаргалки) · `64344d9` (PROGRESS) · `ce76ec8` (START_HERE.html; в main) · CI: `014122d`…`8cb776f` → PR #2 squash-merge `d5cf134` (checks.yml, PR template, check_repo.py + тесты).
+PR #1 и #2 смержены; ветка feature/framework удалена (локально и в origin). Новая работа — из main, ветка `feature/<тема>`.
 Роли: один участник — владелец проекта, координатор, владелец данных и стюард. Добавление участников — позже.
 
 ## Ограничения среды проверки
