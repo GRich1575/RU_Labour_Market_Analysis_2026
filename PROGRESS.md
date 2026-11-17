@@ -3,7 +3,7 @@
 Updated: 2026-11-17 | Branch: feature/framework | Этап: 1 из N (источники данных) | Коммитов: см. `git log`
 
 ## Что сделано (этап 1)
-- Реестр источников: `config/sources.yaml` (17 источников, все статусы `to_verify`).
+- Реестр источников: `config/sources.yaml` (15 источников, все статусы `to_verify`).
 - Описание источников и правил: `docs/sources.md`.
 - Структура данных: `data/` (raw не в git, processed не в git, reference в git) — см. `data/README.md`.
 - `.gitignore`, `README.md` (RU).
