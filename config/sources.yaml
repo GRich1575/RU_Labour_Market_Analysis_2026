@@ -1,5 +1,8 @@
-# Реестр источников данных. Один источник = один блок.
+# Реестр источников данных. Один источник = один блок. Все источники остаются в списке.
 # status: to_verify — адрес/формат/доступ не подтверждены; verified — проверено вручную.
+# data_2026: available — данные за 2026 получены; unverified — не удалось проверить; N/A — данных за 2026 нет.
+# enabled: true — использовать в анализе; false — отключён, пока нет данных за 2026.
+# Правило: учитываются только данные за 2026 год.
 # goal: 1 шоки и инфляция; 2 вакансии/безработные по сферам; 3 МСП; справка — только для сравнения.
 
 sources:
@@ -14,7 +17,9 @@ sources:
     frequency: ежемесячно; ежеквартально (сборник)
     geography: РФ, федеральные округа, регионы
     status: to_verify
-    notes: ID показателя взять из адреса страницы ЕМИСС; выборочный опрос, при уровне ~2% погрешность заметна
+    data_2026: unverified
+    enabled: false
+    notes: rosstat.gov.ru недоступен из среды проверки; ID показателя взять из адреса страницы ЕМИСС; выборочный опрос, погрешность ~2%
 
   - id: rosstat_part_time
     name: Неполная занятость и простои
@@ -27,7 +32,9 @@ sources:
     frequency: ежеквартально
     geography: РФ, регионы
     status: to_verify
-    notes: главный официальный индикатор скрытой безработицы
+    data_2026: unverified
+    enabled: false
+    notes: главный официальный индикатор скрытой безработицы; проверка не проведена (Росстат недоступен)
 
   - id: rosstat_cpi
     name: Индекс потребительских цен (ИПЦ)
@@ -40,7 +47,9 @@ sources:
     frequency: ежемесячно
     geography: РФ
     status: to_verify
-    notes: нужен для анализа шоков
+    data_2026: unverified
+    enabled: false
+    notes: нужен для анализа шоков; проверка не проведена (Росстат недоступен)
 
   - id: rosstat_smb
     name: Малое и среднее предпринимательство (МСП)
@@ -53,7 +62,9 @@ sources:
     frequency: ежегодно / ежеквартально
     geography: РФ, регионы
     status: to_verify
-    notes: определение МСП уточнить (209-ФЗ или Росстат)
+    data_2026: unverified
+    enabled: false
+    notes: определение МСП уточнить (209-ФЗ или Росстат); проверка не проведена
 
   - id: rostrud_registered
     name: Зарегистрированная безработица (службы занятости)
@@ -66,7 +77,9 @@ sources:
     frequency: ежемесячно
     geography: РФ, регионы
     status: to_verify
-    notes: НЕ сравнивать напрямую с МОТ-безработицей; разбивка по профессиям не подтверждена
+    data_2026: unverified
+    enabled: false
+    notes: НЕ сравнивать напрямую с МОТ-безработицей; разбивка по профессиям не подтверждена; федеральный XLSX не найден
 
   - id: cbr_key_rate
     name: Ключевая ставка
@@ -74,12 +87,14 @@ sources:
     role: шоки
     goal: [1]
     indicators: ключевая ставка
-    access: сервис DailyInfo (SOAP, https), cbr.ru статистика
-    format: XML
-    frequency: по решениям ЦБ
+    access: cbr.ru/hd_base/KeyRate (HTML-таблица с фильтром по датам; проверено 2026-11-17)
+    format: HTML (таблица; образец data/raw/cbr_key_rate/keyrate_2026.html)
+    frequency: по решениям ЦБ (значения ежедневные)
     geography: РФ
-    status: to_verify
-    notes: описания старых API могут быть устаревшими
+    status: verified
+    data_2026: available
+    enabled: true
+    notes: "2026 — 222 строки, 05.01.2026–17.11.2026; ставка 16,00 → 14,00 (шаги 16,00 / 15,50 / 15,00 / 14,50 / 14,25 / 14,00); decimal=','; SOAP/XML DailyInfo не проверялся"
 
   - id: cbr_monitoring
     name: Мониторинг предприятий (кадры, планы найма)
@@ -92,7 +107,9 @@ sources:
     frequency: ежеквартально
     geography: РФ, регионы
     status: to_verify
-    notes: качественные оценки бизнеса
+    data_2026: unverified
+    enabled: false
+    notes: качественные оценки бизнеса; выпуск за 2026 не найден (раздел не открыт)
 
   - id: hh_monthly
     name: Краткий обзор рынка труда hh.ru (hh-индекс)
@@ -105,7 +122,9 @@ sources:
     frequency: ежемесячно
     geography: РФ, регионы, специальности
     status: to_verify
-    notes: охват — в основном городские «белые воротнички»; условия использования уточнить
+    data_2026: unverified
+    enabled: false
+    notes: охват — в основном городские «белые воротнички»; условия использования уточнить; страница не извлечена
 
   - id: hh_vacancies
     name: Вакансии и резюме hh.ru по профессиям
@@ -118,7 +137,9 @@ sources:
     frequency: по запросу
     geography: РФ, регионы
     status: to_verify
-    notes: ключевой источник для сегментации по сферам, если ОРС не даёт безработных по профессиям
+    data_2026: unverified
+    enabled: false
+    notes: api.hh.ru отвечает 403 из среды проверки; ключевой источник для сегментации по сферам, если ОРС не даёт безработных по профессиям
 
   - id: sberindex
     name: СберИндекс
@@ -131,6 +152,8 @@ sources:
     frequency: уточнить
     geography: уточнить
     status: to_verify
+    data_2026: unverified
+    enabled: false
     notes: данные одного банка; публичные выгрузки не подтверждены
 
   - id: rlms_hse
@@ -139,12 +162,14 @@ sources:
     role: микроданные
     goal: [1, 2, 3]
     indicators: зарплаты, неформальность, мобильность
-    access: hse.ru (регистрация, условия использования)
-    format: SPSS / Stata / CSV
-    frequency: волнами (ежегодно)
+    access: hse.ru/rlms (регистрация hse.ru/rlms/reg; проверено 2026-11-17)
+    format: SPSS / Stata (подтверждено; CSV не указан)
+    frequency: волнами (ежегодно); 1994–2025
     geography: РФ
     status: to_verify
-    notes: для научного анализа; задержка публикации
+    data_2026: N/A
+    enabled: false
+    notes: последняя волна — 34 (опрос 2025, публикация 09.2026); волны за 2026 нет; задержка ~8–9 мес.; нужна регистрация
 
   - id: hse_isiez
     name: Индексы занятости по отраслям (ИСИЭЗ ВШЭ)
@@ -152,12 +177,14 @@ sources:
     role: независимый
     goal: [2]
     indicators: индексы занятости и вакансий по отраслям
-    access: hse.ru (публикации)
-    format: PDF / XLSX
+    access: hse.ru/isiez/ — 404 (адрес неверен); «Composite indices» на hse.ru/data
+    format: PDF (подтверждено); XLSX не подтверждён
     frequency: ежеквартально
     geography: РФ, отрасли
     status: to_verify
-    notes: ""
+    data_2026: N/A
+    enabled: false
+    notes: найдены выпуски 3Q2025, 4Q2025; выпусков за 2026 поиск не нашёл — проверить вручную; найти рабочий адрес страницы
 
   - id: cetr
     name: Аналитика ЦеТИ
@@ -170,7 +197,9 @@ sources:
     frequency: по мере выхода
     geography: РФ
     status: to_verify
-    notes: ""
+    data_2026: unverified
+    enabled: false
+    notes: cetr.ru недоступен из среды проверки
 
   - id: cmasf
     name: Обзоры ЦМАКП
@@ -183,7 +212,9 @@ sources:
     frequency: по мере выхода
     geography: РФ
     status: to_verify
-    notes: ""
+    data_2026: unverified
+    enabled: false
+    notes: cmasf.ru недоступен из среды проверки
 
   - id: ilostat_oecd
     name: ILOSTAT / OECD
@@ -196,4 +227,6 @@ sources:
     frequency: ежегодно
     geography: страны
     status: to_verify
-    notes: не является независимой проверкой; только для межстрановых сравнений
+    data_2026: unverified
+    enabled: false
+    notes: годовые данные — 2026 обычно не публикуется; не является независимой проверкой; сайты отвечают 403
