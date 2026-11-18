@@ -46,10 +46,10 @@ sources:
     format: XLSX / CSV
     frequency: ежемесячно
     geography: РФ
-    status: to_verify
-    data_2026: unverified
+    status: verified
+    data_2026: available
     enabled: false
-    notes: нужен для анализа шоков; проверка не проведена (Росстат недоступен)
+    notes: Таблица 1 (ИПЦ к предыдущему периоду и к декабрю, по товарам и услугам, янв 2025 – сен 2026) из PDF «Социально-экономическое положение России, январь–сентябрь 2026», стр. 126–127; сверена вручную; CSV в data/raw/rosstat_cpi/. ЕМИСС XLSX не сверён (fedstat.ru — Forbidden); enabled — после сверки
 
   - id: rosstat_smb
     name: Малое и среднее предпринимательство (МСП)
