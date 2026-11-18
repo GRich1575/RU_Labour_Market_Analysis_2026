@@ -16,14 +16,12 @@ Updated: 2026-11-18 | Branch: main (`ba28647`) | Текущий этап: 1 — 
 ## Этап 1: состояние
 - Реестр: `config/sources.yaml` — 15 источников. Журнал проверок: `docs/stage1/source_checks.md`. Бриф: `docs/stage1/brief.md`.
 - Образец (2026): `data/raw/cbr_key_rate/keyrate_2026.html` (+ README.txt). Raw не в git.
-- Правило: только данные за 2026 год. Источник без данных за 2026 — остаётся в реестре с `data_2026: N/A`, `enabled: false`. Не проверено — `unverified`, `enabled: false`.
+- Целевой год — `config/project.yaml` (`target_year: 2026`). Правило: только данные за 2026 год. Источник без данных за 2026 — остаётся в реестре с `data_2026: N/A`, `enabled: false`. Не проверено — `unverified`, `enabled: false`.
 - ОРС (`rosstat_orc`): данные за 2026 из раздела 2 PDF «Социально-экономическое положение России, январь–сентябрь 2026» (стр. 196–205) → `data/raw/rosstat_orc/` (7 CSV, сверены со страницами PDF 2026-11-18; подписи — как в источнике). `enabled: false`, пока не сверён ЕМИСС XLSX.
 - Сводка реестра: enabled 1 (cbr_key_rate); available 2 (cbr_key_rate, rosstat_orc); N/A 2 (rlms_hse, hse_isiez); unverified 11.
 <!-- registry-summary: total=15 available=2 enabled=1 na=2 unverified=11 -->
-- Целевой год — `config/project.yaml` (`target_year: 2026`).
 - Документация: `docs/sources.md`, `data/README.md`, `docs/prerequisites.md`, `docs/cheatsheets/` (Windows / macOS / Linux).
-- Окружение: `requirements.txt` ставится в `.venv` без ошибок (pandas 3.1.1, numpy 2.5.5, lxml, pdfplumber, pytest 9.2).
-- Не проверено на macOS / Linux: команды шпаргалок и venv.
+- Окружение: `requirements.txt` ставится в `.venv` без ошибок (pandas 3.1.1, numpy 2.5.5, lxml, pdfplumber, pytest 9.2). Не проверено на macOS / Linux.
 - Пошаговая установка (RU/EN, схемы в `docs/homework/img/`, не реальные скриншоты): `docs/homework/setup_guide_ru.html`, `setup_guide_en.html`. Проверено рендером в Chrome (headless), все картинки подключены; macOS/Linux без картинок.
 - HTML-версия порядка чтения: `docs/START_HERE.html` (ссылки проверены; GitHub показывает .html как код — нужен htmlpreview/Pages).
 
@@ -34,6 +32,7 @@ PR #1–#7 смержены; ветки удалены (локально и в o
 
 ## Ограничения среды проверки
 - Недоступны из среды: rosstat.gov.ru, cetr.ru, cmasf.ru (000); fedstat.ru, api.hh.ru, ilostat, oecd (403).
+- **Для команды:** fedstat.ru (ЕМИСС) — «Forbidden» в браузере 2026-11-18; вероятно, из-за пределов РФ. Проверить с российского IP, записать в `source_checks.md`.
 - Поиск даёт ссылки, но не подтверждает содержимое файлов.
 
 ## Открытые вопросы
