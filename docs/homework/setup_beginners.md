@@ -48,6 +48,13 @@
 Альтернатива: `winget install Python.Python.3.13` в PowerShell.
 
 ### A2. Git
+Подробная инструкция по установке Git для Windows: https://cloud.ru/blog/kak-ustanovit-git-na-windows
+
+**Важно:**
+- **Рекомендуемые текстовые редакторы:** Notepad / Notepad++, VS Code (или VS Code Insiders), Sublime Text.
+- Если установлен VS Code — используйте его (VS Code или VS Code Insiders).
+- Vim и Nano не рекомендуются, если вы не знакомы с Unix-подобными системами.
+
 1. Скачайте установщик с https://git-scm.com/download/win.
 2. Установите с настройками по умолчанию (нажимайте «Next»).
 3. Проверка:
