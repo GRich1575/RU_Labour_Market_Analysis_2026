@@ -17,7 +17,7 @@
 - **Роструд, ЦБ-мониторинг, hh-обзор, СберИндекс — частично:** адреса открываются, но содержимое или формат не извлечены.
 
 Сводка реестра (`config/sources.yaml`): всего 15; с данными за 2026 — 1; enabled — 1; N/A — 2; unverified — 12.
-<!-- registry-summary: total=15 available=1 enabled=1 na=2 unverified=12 -->
+<!-- registry-summary: total=15 available=2 enabled=1 na=2 unverified=11 -->
 
 Журнал проверок по категориям (проверено / частично / блок / неверный адрес): `docs/stage1/source_checks.md`.
 

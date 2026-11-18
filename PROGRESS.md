@@ -1,11 +1,11 @@
 # PROGRESS — RU Labour Market Analysis 2026
 
-Updated: 2026-11-17 | Branch: main (`2ffe4da`) | Текущий этап: 1 — источники данных (rework needed)
+Updated: 2026-11-18 | Branch: main (`ba28647`) | Текущий этап: 1 — источники данных (rework needed)
 
 ## Дорожная карта (предложенная; этапы 3–7 уточняются)
 | Этап | Содержание | Статус | Комментарий |
 |---|---|---|---|
-| 1 | Источники: идентификация, проверка, образцы, описание формата | **Rework needed** | enabled 1 из 15; unverified 12; см. `docs/stage1/brief.md` |
+| 1 | Источники: идентификация, проверка, образцы, описание формата | **Rework needed** | enabled 1 из 15; unverified 11; см. `docs/stage1/brief.md` |
 | 2 | Каркас (`pyproject.toml`, `src/`, `tests/`), загрузчик ОРС | Not started | Старт после ответов преподавателя и образцов по п. 1–3 брифа |
 | 3 | Анализ цели 1: шоки и инфляция (ключевая ставка, ИПЦ) | Not started | Ключевая ставка — образец готов |
 | 4 | Анализ цели 2: вакансии/безработица по сферам | Not started | Зависит от ОРС и hh.ru (решение по прокси) |
@@ -17,8 +17,9 @@ Updated: 2026-11-17 | Branch: main (`2ffe4da`) | Текущий этап: 1 — 
 - Реестр: `config/sources.yaml` — 15 источников. Журнал проверок: `docs/stage1/source_checks.md`. Бриф: `docs/stage1/brief.md`.
 - Образец (2026): `data/raw/cbr_key_rate/keyrate_2026.html` (+ README.txt). Raw не в git.
 - Правило: только данные за 2026 год. Источник без данных за 2026 — остаётся в реестре с `data_2026: N/A`, `enabled: false`. Не проверено — `unverified`, `enabled: false`.
-- Сводка реестра: enabled 1 (cbr_key_rate); N/A 2 (rlms_hse, hse_isiez); unverified 12.
-<!-- registry-summary: total=15 available=1 enabled=1 na=2 unverified=12 -->
+- ОРС (`rosstat_orc`): данные за 2026 из раздела 2 PDF «Социально-экономическое положение России, январь–сентябрь 2026» (стр. 196–205) → `data/raw/rosstat_orc/` (7 CSV, сверены со страницами PDF 2026-11-18; подписи — как в источнике). `enabled: false`, пока не сверён ЕМИСС XLSX.
+- Сводка реестра: enabled 1 (cbr_key_rate); available 2 (cbr_key_rate, rosstat_orc); N/A 2 (rlms_hse, hse_isiez); unverified 11.
+<!-- registry-summary: total=15 available=2 enabled=1 na=2 unverified=11 -->
 - Целевой год — `config/project.yaml` (`target_year: 2026`).
 - Документация: `docs/sources.md`, `data/README.md`, `docs/prerequisites.md`, `docs/cheatsheets/` (Windows / macOS / Linux).
 - Окружение: `requirements.txt` ставится в `.venv` без ошибок (pandas 3.1.1, numpy 2.5.5, lxml, pdfplumber, pytest 9.2).
