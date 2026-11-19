@@ -17,8 +17,8 @@
 - **ILOSTAT / OECD, CETR, ЦМАКП — не проверено** (403 или недоступность).
 - **Роструд — данные за 2026 получены** из таблиц 6–7 того же PDF Росстата (`rostrud_registered`). **hh-обзор, СберИндекс — частично:** адреса открываются, но содержимое или формат не извлечены. **Мониторинг предприятий ЦБ — получен** (см. выше).
 
-Сводка реестра (`config/sources.yaml`): всего 15; с данными за 2026 — 5 (cbr_key_rate, rosstat_orc, rosstat_cpi, rostrud_registered, cbr_monitoring); enabled — 1; N/A — 3; unverified — 7.
-<!-- registry-summary: total=15 available=5 enabled=1 na=3 unverified=7 -->
+Сводка реестра (`config/sources.yaml`): всего 15; с данными за 2026 — 6 (cbr_key_rate, rosstat_orc, rosstat_cpi, rostrud_registered, cbr_monitoring, hh_monthly — январь 2026); enabled — 1; N/A — 3; unverified — 6.
+<!-- registry-summary: total=15 available=6 enabled=1 na=3 unverified=6 -->
 
 Журнал проверок по категориям (проверено / частично / блок / неверный адрес): `docs/stage1/source_checks.md`.
 
@@ -58,7 +58,6 @@
 | rosstat_orc | Сверка: открыть ЕМИСС (fedstat.ru) в браузере, найти показатель «безработица по МОТ», скачать помесячный ряд за 2026 (XLSX). Записать ID показателя. Сохранить в `data/raw/rosstat_orc/` с README.txt. |
 | rosstat_cpi | Сверка: ЕМИСС → ИПЦ, месячные значения; скачать ряд за 2026. Записать ID показателя. |
 | rosstat_smb | Найти публикацию по МСП за 2026 (ежегодная или квартальная); уточнить определение (209-ФЗ или Росстат). Если 2026 не выпущен — `N/A`. |
-| hh_monthly | Открыть stats.hh.ru в браузере; проверить наличие отчётов за 2026 (ежемесячно); проверить условия использования и API monthly-report. |
 | hh_vacancies | Проверить api.hh.ru с вашей машины (запрос `GET /vacancies` с HH-User-Agent, содержащим контакт); сохранить один JSON-ответ с датой 2026. Если 403 — проверить регистрацию приложения hh.ru. |
 | sberindex | Открыть sberindex.ru → раздел данных; проверить публичную выгрузку (CSV/XLSX) и условия использования; наличие данных за 2026. Если выгрузки нет — `N/A`. |
 | cetr | Открыть cetr.ru → публикации; найти обзоры рынка труда за 2026; скачать PDF; отметить дату выпуска. |

@@ -5,7 +5,7 @@ Updated: 2026-11-19 | Branch: main (`1124866`); открыт PR #18 (`feature/br
 ## Дорожная карта (предложенная; этапы 3–7 уточняются)
 | Этап | Содержание | Статус | Комментарий |
 |---|---|---|---|
-| 1 | Источники: идентификация, проверка, образцы, описание формата | **Rework needed** | enabled 1 из 15; unverified 7; см. `docs/stage1/brief.md` |
+| 1 | Источники: идентификация, проверка, образцы, описание формата | **Rework needed** | enabled 1 из 15; unverified 6; см. `docs/stage1/brief.md` |
 | 2 | Каркас (`pyproject.toml`, `src/`, `tests/`), загрузчик ОРС | Not started | Старт после ответов преподавателя и образцов по п. 1–3 брифа |
 | 3 | Анализ цели 1: шоки и инфляция (ключевая ставка, ИПЦ) | Not started | Ключевая ставка — образец готов |
 | 4 | Анализ цели 2: вакансии/безработица по сферам | Not started | Зависит от ОРС и hh.ru (решение по прокси) |
@@ -18,8 +18,8 @@ Updated: 2026-11-19 | Branch: main (`1124866`); открыт PR #18 (`feature/br
 - Образец (2026): `data/raw/cbr_key_rate/keyrate_2026.html` (+ README.txt). Raw не в git.
 - Целевой год — `config/project.yaml` (`target_year: 2026`). Правило: только данные за 2026 год. Источник без данных за 2026 — остаётся в реестре с `data_2026: N/A`, `enabled: false`. Не проверено — `unverified`, `enabled: false`.
 - ОРС и ИПЦ (`rosstat_orc`, `rosstat_cpi`): данные за 2026 из PDF «Социально-экономическое положение России, январь–сентябрь 2026» → `data/raw/rosstat_orc/` (7 CSV, стр. 196–205), `data/raw/rosstat_cpi/` (таблица 1, стр. 126–127); сверены 2026-11-18. `enabled: false`, пока не сверён ЕМИСС XLSX.
-- Сводка реестра: enabled 1 (cbr_key_rate); available 5 (cbr_key_rate, rosstat_orc, rosstat_cpi, rostrud_registered — данные Роструда из таблиц 6–7 того же PDF; cbr_monitoring — ноябрь 2026, файл `data/raw/cbr_monitoring/1126.pdf`); N/A 3 (rlms_hse, hse_isiez, rosstat_part_time); unverified 7.
-<!-- registry-summary: total=15 available=5 enabled=1 na=3 unverified=7 -->
+- Сводка реестра: enabled 1 (cbr_key_rate); available 6 (cbr_key_rate, rosstat_orc, rosstat_cpi, rostrud_registered — данные Роструда из таблиц 6–7 того же PDF; cbr_monitoring — ноябрь 2026, файл `data/raw/cbr_monitoring/1126.pdf`; hh_monthly — январь 2026); N/A 3 (rlms_hse, hse_isiez, rosstat_part_time); unverified 6.
+<!-- registry-summary: total=15 available=6 enabled=1 na=3 unverified=6 -->
 - Документация: `docs/sources.md`, `data/README.md`, `docs/prerequisites.md`, `docs/cheatsheets/` (Windows / macOS / Linux).
 - Окружение: `requirements.txt` ставится в `.venv` без ошибок (pandas 3.1.1, numpy 2.5.5, lxml, pdfplumber, pytest 9.2). Не проверено на macOS / Linux.
 - Пошаговая установка (RU/EN, схемы в `docs/homework/img/`, не реальные скриншоты): `docs/homework/setup_guide_ru.html`, `setup_guide_en.html`. Проверено рендером в Chrome (headless), все картинки подключены; macOS/Linux без картинок.
