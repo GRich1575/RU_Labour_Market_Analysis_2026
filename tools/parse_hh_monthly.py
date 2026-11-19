@@ -1,6 +1,6 @@
 """Разбор ежемесячных отчётов hh.ru «Краткий обзор рынка труда» (stats.hh.ru).
 
-Вход:  data/raw/hh_monthly/stats_monthly-report_2026-<месяц>.pdf
+Вход:  data/reference/hh/monthly_reports_2026/stats_monthly-report_2026-<месяц>.pdf
 Выход: data/processed/hh_monthly_2026_headline.csv  (общие показатели, по отчёту)
        data/processed/hh_monthly_2026_spheres.csv   (таблицы «Рэнкинг» по сферам и специализациям)
 
@@ -13,7 +13,7 @@ from pathlib import Path
 import pdfplumber
 
 ROOT = Path(__file__).resolve().parent.parent
-RAW = ROOT / "data" / "raw" / "hh_monthly"
+RAW = ROOT / "data" / "reference" / "hh" / "monthly_reports_2026"
 OUT = ROOT / "data" / "processed"
 
 # Родительный падеж месяцев в тексте сноски («Уровень безработицы в феврале 2026 года»).
