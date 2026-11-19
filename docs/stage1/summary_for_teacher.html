@@ -4,29 +4,31 @@
 <meta charset="utf-8">
 <title>Этап 1: сводка для преподавателя (черновик)</title>
 <style>
-  @page { size: A4 landscape; margin: 7mm; }
-  body { font-family: Arial, sans-serif; font-size: 8px; line-height: 1.15; margin: 0; color: #111; }
-  h1 { font-size: 12.5px; margin: 0 0 2px; }
-  .meta { color: #555; margin-bottom: 6px; }
-  h2 { font-size: 10px; margin: 4px 0 2px; border-bottom: 1px solid #999; padding-bottom: 1px; }
-  table { border-collapse: collapse; width: 100%; }
-  th, td { border: 1px solid #bbb; padding: 1px 2px; text-align: left; vertical-align: top; }
+  @page { size: A4 landscape; margin: 5mm; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; font-size: 12pt; line-height: 1.25; color: #111; padding: 4mm; box-sizing: border-box; }
+  h1 { font-size: 18pt; margin: 0 0 4px; }
+  .meta { color: #555; margin-bottom: 8px; font-size: 11pt; }
+  h2 { font-size: 14pt; margin: 10px 0 4px; border-bottom: 1px solid #999; padding-bottom: 2px; page-break-after: avoid; }
+  table { border-collapse: collapse; width: 100%; table-layout: fixed; font-size: 11pt; }
+  th, td { border: 1px solid #bbb; padding: 3px 4px; text-align: left; vertical-align: top; word-wrap: break-word; }
   th { background: #eee; }
+  tr { page-break-inside: avoid; }
   td.ok { color: #1a6b1a; font-weight: bold; }
   td.part { color: #8a5a00; font-weight: bold; }
   td.no { color: #a11; font-weight: bold; }
-  .note { font-size: 8.5px; color: #333; margin-top: 3px; }
-  ol { margin: 2px 0 0 16px; padding: 0; }
-  li { margin: 2px 0; }
+  .note { font-size: 11pt; color: #333; margin-top: 4px; }
+  ol { margin: 4px 0 0 22px; padding: 0; }
+  li { margin: 4px 0; }
 </style>
 </head>
 <body>
-<h1>Этап 1 — источники данных: сводка и вопросы (черновик для проверки)</h1>
+<h1>Этап 1 — источники данных: сводка и вопросы</h1>
 <div class="meta">RU Labour Market Analysis 2026 · состояние на 2026-11-19</div>
 
 <h2>1. План проекта</h2>
 <table>
-  <tr><th style="width:5%">Этап</th><th>Содержание</th><th style="width:30%">Статус</th></tr>
+  <tr><th style="width:6%">Этап</th><th>Содержание</th><th style="width:30%">Статус</th></tr>
   <tr><td>1</td><td>Источники: проверка, образцы, описание формата</td><td>В работе (rework)</td></tr>
   <tr><td>2</td><td>Структура проекта (pyproject, src, tests), загрузчик ОРС</td><td>Не начат; после статуса «готов» по этапу 1</td></tr>
   <tr><td>3</td><td>Цель 1: шоки и инфляция (ключевая ставка, ИПЦ)</td><td>Не начат</td></tr>
