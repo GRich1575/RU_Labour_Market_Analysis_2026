@@ -138,5 +138,4 @@
 | Ревьюер | Reviewer | Проверяет изменения другого участника | — | — |
 | Issue | Issue | Задача или вопрос в GitHub Issues | https://docs.github.com/ru/issues | https://docs.github.com/en/issues |
 | Ревью кода | Code review | Проверка изменений перед слиянием | — | https://docs.github.com/en/pull-requests |
-| Отключено (disabled) | Disabled | Правило описано, но не действует; см. `docs/team/` | — | — |
 | CI (непрерывная проверка) | Continuous integration (CI) | Автоматический запуск проверок при изменениях (GitHub Actions, не включено) | https://docs.github.com/ru/actions | https://docs.github.com/en/actions |

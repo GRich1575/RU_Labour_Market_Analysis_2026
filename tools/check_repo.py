@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Проверки репозитория (C1–C10, см. docs/team/automation_design.md).
+"""Проверки репозитория (C1–C10).
 
 Запуск из любой папки:  python tools/check_repo.py
 Выход: 0 — нарушений нет; 1 — есть нарушения.
@@ -333,7 +333,7 @@ def prose_lines(rel):
 def check_absolute_paths(files):
     set_rule("C8")
     for p in files:
-        if not p.endswith((".md", ".py", ".yaml")) or p.startswith("docs/team/"):
+        if not p.endswith((".md", ".py", ".yaml")):
             continue
         try:
             lines = list(prose_lines(p))

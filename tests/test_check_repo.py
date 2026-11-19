@@ -214,12 +214,6 @@ def test_absolute_path_is_c8(repo):
     assert [(v[0], v[3]) for v in cr.violations] == [(rel, "C8")]
 
 
-def test_absolute_path_in_team_docs_is_allowed(repo):
-    rel = write(repo, "docs/team/example.md", "cd D:\\Projects\\x\n")
-    cr.check_absolute_paths([rel])
-    assert cr.violations == []
-
-
 # C9 -------------------------------------------------------------------------
 
 def test_broken_link_is_c9(repo):

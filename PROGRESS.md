@@ -22,8 +22,7 @@ Updated: 2026-11-18 | Branch: main (`1124866`) | Текущий этап: 1 — 
 <!-- registry-summary: total=15 available=4 enabled=1 na=2 unverified=9 -->
 - Документация: `docs/sources.md`, `data/README.md`, `docs/prerequisites.md`, `docs/cheatsheets/` (Windows / macOS / Linux).
 - Окружение: `requirements.txt` ставится в `.venv` без ошибок (pandas 3.1.1, numpy 2.5.5, lxml, pdfplumber, pytest 9.2). Не проверено на macOS / Linux.
-- Пошаговая установка (RU/EN, схемы в `docs/homework/img/`, не реальные скриншоты): `docs/homework/setup_guide_ru.html`, `setup_guide_en.html`. Проверено рендером в Chrome (headless), все картинки подключены; macOS/Linux без картинок.
-- HTML-версия порядка чтения: `docs/START_HERE.html` (ссылки проверены; GitHub показывает .html как код — нужен htmlpreview/Pages).
+- Пошаговая установка: `docs/homework/setup_beginners.md` (единственная версия; HTML/RU-EN гайд и иллюстрации удалены 2026-11-19 как дубли).
 
 ## Коммиты
 `9234478` этап 1 · `3fb8e17` · `3f35e35` (число источников) · `d70e945` (prerequisites) · `54e6286` (requirements, README, шпаргалки) · `64344d9` (PROGRESS) · `ce76ec8` (START_HERE.html; в main) · CI: `014122d`…`8cb776f` → PR #2 squash-merge `d5cf134` (checks.yml, PR template, check_repo.py + тесты) · PR #3 `4310e1e` · PR #4 `d11a263` (раздел качества данных в шаблоне PR). · PR #5 `9b0cb4c` (итоги PR) · PR #6 `e89d5c9` (collaboration.md) · PR #7 `2ffe4da` (исключение удалено).
@@ -46,7 +45,7 @@ PR #1–#7 смержены; ветки удалены (локально и в o
 8. Пушить в origin сейчас или держать локально до первого merge.
 9. Десятичный знак в CSV (запятая или точка) — зафиксировать в `data/README.md`.
 10. pandas 3.x стоит в окружении (`pandas>=2.2` допускает). Фиксировать `<3` или проверить кода на совместимость?
-11. Командная политика (`docs/team/`) — ОТКЛЮЧЕНА, решение о включении позже (по уровням, см. `docs/team/README.md`).
+11. Командная политика — удалена из репозитория 2026-11-19; восстановима из истории git.
 12. **Блокер этапа 1:** облачное хранилище команды для `data/raw/` — решить после консультаций с командой.
 13. Канал командной связи: группа в Telegram или WhatsApp (вопросы, образцы, координация) — опция, решение за командой. Образцы в чате — только усечённые, без персональных данных; в репозиторий попадают через PR.
 
