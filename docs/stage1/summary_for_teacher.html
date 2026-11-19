@@ -2,28 +2,31 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<title>Этап 1: сводка для преподавателя</title>
+<title>Этап 1: сводка для преподавателя (черновик)</title>
 <style>
-  body { font-family: Arial, sans-serif; font-size: 11px; line-height: 1.35; margin: 18px; color: #111; }
-  h1 { font-size: 15px; margin: 0 0 2px; }
-  .meta { color: #555; margin-bottom: 8px; }
-  h2 { font-size: 12px; margin: 9px 0 3px; border-bottom: 1px solid #999; padding-bottom: 1px; }
+  @page { size: A4 landscape; margin: 7mm; }
+  body { font-family: Arial, sans-serif; font-size: 8px; line-height: 1.15; margin: 0; color: #111; }
+  h1 { font-size: 12.5px; margin: 0 0 2px; }
+  .meta { color: #555; margin-bottom: 6px; }
+  h2 { font-size: 10px; margin: 4px 0 2px; border-bottom: 1px solid #999; padding-bottom: 1px; }
   table { border-collapse: collapse; width: 100%; }
-  th, td { border: 1px solid #bbb; padding: 2px 4px; text-align: left; vertical-align: top; }
+  th, td { border: 1px solid #bbb; padding: 1px 2px; text-align: left; vertical-align: top; }
   th { background: #eee; }
-  ul { margin: 2px 0 2px 16px; padding: 0; }
-  li { margin: 1px 0; }
-  .q li { margin: 3px 0; }
-  .ok { color: #1a6b1a; } .no { color: #a11; }
+  td.ok { color: #1a6b1a; font-weight: bold; }
+  td.part { color: #8a5a00; font-weight: bold; }
+  td.no { color: #a11; font-weight: bold; }
+  .note { font-size: 8.5px; color: #333; margin-top: 3px; }
+  ol { margin: 2px 0 0 16px; padding: 0; }
+  li { margin: 2px 0; }
 </style>
 </head>
 <body>
-<h1>Этап 1 — источники данных: сводка и вопросы</h1>
-<div class="meta">RU Labour Market Analysis 2026 · состояние на 2026-11-19 · ветка main</div>
+<h1>Этап 1 — источники данных: сводка и вопросы (черновик для проверки)</h1>
+<div class="meta">RU Labour Market Analysis 2026 · состояние на 2026-11-19</div>
 
 <h2>1. План проекта</h2>
 <table>
-  <tr><th>Этап</th><th>Содержание</th><th>Статус</th></tr>
+  <tr><th style="width:5%">Этап</th><th>Содержание</th><th style="width:30%">Статус</th></tr>
   <tr><td>1</td><td>Источники: проверка, образцы, описание формата</td><td>В работе (rework)</td></tr>
   <tr><td>2</td><td>Каркас проекта (pyproject, src, tests), загрузчик ОРС</td><td>Не начат; после статуса «готов» по этапу 1</td></tr>
   <tr><td>3</td><td>Цель 1: шоки и инфляция (ключевая ставка, ИПЦ)</td><td>Не начат</td></tr>
@@ -33,23 +36,37 @@
   <tr><td>7</td><td>Итоговый отчёт и защита</td><td>Не начат</td></tr>
 </table>
 
-<h2>2. Что сделано (этап 1)</h2>
-<ul>
-  <li>Реестр из 15 источников: <b>6 с данными за 2026</b>, 1 включён в анализ, 3 со статусом N/A, 6 не проверено.</li>
-  <li class="ok">Ключевая ставка ЦБ — проверена, данные за 2026 получены, источник включён.</li>
-  <li class="ok">ОРС и ИПЦ Росстата — данные за 2026 из PDF «Социально-экономическое положение России, январь–сентябрь 2026». Сверка с ЕМИСС не выполнена.</li>
-  <li class="ok">Роструд — данные за 2026 из таблиц 6–7 того же PDF.</li>
-  <li class="ok">«Мониторинг предприятий» ЦБ (выпуск № 11, ноябрь 2026) — получен; группы предприятий сверены с ФЗ-209.</li>
-  <li class="ok">Обзор рынка труда hh.ru — 10 отчётов за январь–октябрь 2026, разобраны: общие показатели и разбивка по 51 сфере на отчёт.</li>
-  <li class="ok">Справочники hh.ru (регионы России, перечисления) — получены по API.</li>
-  <li class="ok">Нормативная база МСП: ФЗ-209 (ред. 26.06.2026), ПП № 265 (пороги дохода 120 / 800 / 2 000 млн ₽), ПП № 1412 (предел 1 000 человек для лёгкой промышленности, редакция 2017 года), норма о резидентах ИНТЦ (ст. 4 ч. 3).</li>
-  <li class="no">Неполная занятость и простои (Росстат) — данных за 2026 нет (N/A).</li>
-  <li class="no">Не проверено: поиск вакансий hh.ru (403, нужна регистрация приложения), СберИндекс, ЦМАКП (cmasf), ЦеТ (cetr), ILOSTAT / OECD, статистика Росстата по МСП.</li>
-  <li class="no">Не проверено с российского IP: ЕМИСС, сайт Росстата, pravo.gov.ru.</li>
-</ul>
+<h2>2. Источники: что проверено и где лежит</h2>
+<table>
+  <tr>
+    <th style="width:17%">Источник</th>
+    <th style="width:9%">Провайдер</th>
+    <th style="width:17%">Где хранится</th>
+    <th style="width:12%">Проверка</th>
+    <th style="width:13%">Данные за 2026</th>
+    <th style="width:6%">В анализе</th>
+    <th>Комментарий</th>
+  </tr>
+  <tr><td>Ключевая ставка ЦБ (cbr_key_rate)</td><td>Банк России</td><td>data/raw/cbr_key_rate/</td><td class="ok">Проверено</td><td>Да: 222 строки</td><td>Да</td><td>Включён</td></tr>
+  <tr><td>Мониторинг предприятий ЦБ (cbr_monitoring)</td><td>Банк России</td><td>data/raw/cbr_monitoring/ (PDF, ноябрь 2026)</td><td class="ok">Проверено по структуре</td><td>Да: выпуск № 11 (55)</td><td>Нет</td><td>Таблицы не извлечены. Группы предприятий не совпадают с ФЗ-209 и не взвешены по добавленной стоимости</td></tr>
+  <tr><td>Обследование рабочей силы (rosstat_orc)</td><td>Росстат</td><td>data/raw/rosstat_orc/ (7 CSV, PDF)</td><td class="part">Частично</td><td>Да: PDF, стр. 196–205</td><td>Нет</td><td>Сверка с ЕМИСС XLSX не выполнена (нужен российский IP)</td></tr>
+  <tr><td>Индекс потребительских цен (rosstat_cpi)</td><td>Росстат</td><td>data/raw/rosstat_cpi/ (CSV, PDF)</td><td class="part">Частично</td><td>Да: PDF, стр. 126–127</td><td>Нет</td><td>Сверка с ЕМИСС не выполнена</td></tr>
+  <tr><td>Зарегистрированная безработица (rostrud_registered)</td><td>Роструд (данные через Росстат)</td><td>PDF выпуска № 9, табл. 6–7; CSV не сохранены</td><td class="ok">Проверено по PDF</td><td>Да: стр. 203–205</td><td>Нет</td><td>Сайт Роструда напрямую не проверен</td></tr>
+  <tr><td>Краткий обзор рынка труда hh.ru (hh_monthly)</td><td>hh.ru</td><td>data/reference/hh/monthly_reports_2026/ (10 PDF)</td><td class="ok">Проверено</td><td>Да: январь–октябрь 2026</td><td>Нет</td><td>Разбивка по 51 сфере на отчёт. Регионов нет. Безработица — Росстат, с задержкой 2–3 месяца</td></tr>
+  <tr><td>Малое и среднее предпринимательство (rosstat_smb)</td><td>Росстат</td><td>data/raw/rosstat_smb/ (регистрация, 6 файлов)</td><td class="no">Не проверено</td><td>Файлы есть, МСП в них не выделены</td><td>Нет</td><td>Публикация по МСП за 2026 не найдена (сайт недоступен)</td></tr>
+  <tr><td>Неполная занятость и простои (rosstat_part_time)</td><td>Росстат</td><td>—</td><td class="ok">Проверено</td><td class="no">Нет (N/A)</td><td>Нет</td><td>В выпуске № 9 только методология. Доклады 1, 4, 7, 10 не получены</td></tr>
+  <tr><td>Вакансии и резюме hh.ru, API (hh_vacancies)</td><td>hh.ru</td><td>—</td><td class="no">Заблокировано</td><td>Нет</td><td>Нет</td><td>Поиск вакансий: 403. Нужна регистрация приложения на dev.hh.ru. Справочники API получены (data/reference/hh/)</td></tr>
+  <tr><td>СберИндекс (sberindex)</td><td>СберИндекс</td><td>—</td><td class="no">Не проверено</td><td>Не подтверждено</td><td>Нет</td><td>Сайт не извлекается; открытая выгрузка не найдена</td></tr>
+  <tr><td>RLMS-HSE (rlms_hse)</td><td>ВШЭ</td><td>—</td><td class="part">Частично</td><td class="no">N/A</td><td>Нет</td><td>Опрос 2025 г.; волна 2026 не выпущена. Нужна регистрация</td></tr>
+  <tr><td>Индексы ИСИЭЗ (hse_isiez)</td><td>ВШЭ</td><td>—</td><td class="no">Адрес неверен</td><td class="no">N/A</td><td>Нет</td><td>Адрес в реестре даёт 404. Найдены квартальные PDF за 2025 г.</td></tr>
+  <tr><td>ЦеТИ (cetr)</td><td>ЦеТИ</td><td>—</td><td class="no">Не проверено</td><td>Не подтверждено</td><td>Нет</td><td>Сайт недоступен из среды проверки</td></tr>
+  <tr><td>ЦМАКП (cmasf)</td><td>ЦМАКП</td><td>—</td><td class="no">Не проверено</td><td>Не подтверждено</td><td>Нет</td><td>Сайт недоступен из среды проверки</td></tr>
+  <tr><td>ILOSTAT / OECD (ilostat_oecd)</td><td>ILO / OECD</td><td>—</td><td class="no">Не проверено</td><td>Не подтверждено</td><td>Нет</td><td>Сайты дают 403. Bulk CSV нужно скачать вручную</td></tr>
+</table>
+<div class="note">Итого: 15 источников. Данные за 2026 есть у 6, N/A у 3 (неполная занятость, RLMS-HSE, ИСИЭЗ), не проверено у 6. В анализе включён 1 (ключевая ставка ЦБ).</div>
 
 <h2>3. Вопросы к преподавателю</h2>
-<ol class="q">
+<ol>
   <li>Принимаем ли ключевую ставку ЦБ как первый проверенный источник для цели 1 (шоки и инфляция)?</li>
   <li>Достаточно ли hh.ru (вакансии и резюме по сферам) как прокси для цели 2, если ОРС не публикует безработицу по профессиям?</li>
   <li>Определение МСП для цели 3: подтверждаете ли статистику Росстата (только численность работников) или нужен реестр МСП ФНС по ФЗ-209 (доход и численность)?</li>
