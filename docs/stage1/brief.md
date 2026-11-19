@@ -16,8 +16,8 @@
 - **ILOSTAT / OECD, CETR, ЦМАКП — не проверено** (403 или недоступность).
 - **Роструд — данные за 2026 получены** из таблиц 6–7 того же PDF Росстата (`rostrud_registered`). **ЦБ-мониторинг, hh-обзор, СберИндекс — частично:** адреса открываются, но содержимое или формат не извлечены.
 
-Сводка реестра (`config/sources.yaml`): всего 15; с данными за 2026 — 4 (cbr_key_rate, rosstat_orc, rosstat_cpi, rostrud_registered); enabled — 1; N/A — 2; unverified — 9.
-<!-- registry-summary: total=15 available=4 enabled=1 na=2 unverified=9 -->
+Сводка реестра (`config/sources.yaml`): всего 15; с данными за 2026 — 5 (cbr_key_rate, rosstat_orc, rosstat_cpi, rostrud_registered, cbr_monitoring); enabled — 1; N/A — 2; unverified — 8.
+<!-- registry-summary: total=15 available=5 enabled=1 na=2 unverified=8 -->
 
 Журнал проверок по категориям (проверено / частично / блок / неверный адрес): `docs/stage1/source_checks.md`.
 
