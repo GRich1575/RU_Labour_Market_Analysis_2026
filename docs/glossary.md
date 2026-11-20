@@ -35,7 +35,7 @@
 | Волна (опроса) | Survey wave | Один цикл опроса в панели; в RLMS — отдельный год | https://www.hse.ru/rlms/ | https://www.hse.ru/en/rlms/ |
 | ИСИЭЗ ВШЭ | HSE ISIEZ (Institute for Statistical Research and Economics of Knowledge) | Институт статистических исследований и экономики знаний ВШЭ; индексы занятости и вакансий по отраслям | https://www.hse.ru/en/ | https://www.hse.ru/en/ |
 | ЦеТИ | CETR (Center for Economic and Technological Research) | Центр экономических и технологических исследований; аналитика рынка труда | https://cetr.ru/ ‡ | — |
-| ЦМАКП | CMASF (Center for Macroeconomic Analysis and Short-term Forecasting) | Центр макроэкономического анализа и краткосрочного прогнозирования | https://cmasf.ru/ ‡ | — |
+| ЦМАКП | CMASF (Center for Macroeconomic Analysis and Short-term Forecasting) | Центр макроэкономического анализа и краткосрочного прогнозирования | http://www.forecast.ru/ ‡ | — |
 | СберИндекс | SberIndex | Аналитический сервис Сбера; индексы зарплат и занятости | https://sberindex.ru/ | — |
 
 ## 2. Инфляция, ставка и шоки
@@ -95,6 +95,9 @@
 | Контрольная сумма (sha256) | SHA-256 checksum | Отпечаток файла; совпадение означает, что файл не изменился | https://ru.wikipedia.org/wiki/SHA-2 | https://en.wikipedia.org/wiki/SHA-2 |
 | API | Application Programming Interface | Интерфейс для запроса данных у сервиса (например, api.hh.ru) | https://ru.wikipedia.org/wiki/API | https://en.wikipedia.org/wiki/API |
 | Регулярное выражение | Regular expression (regex) | Шаблон для поиска текста; используется в проверках имён | https://ru.wikipedia.org/wiki/Регулярное_выражение ‡ | https://en.wikipedia.org/wiki/Regular_expression |
+| Приблизительное значение (`~`) | Approximate value (`~`) | Знак `~` перед значением: число приблизительное, например `~ 2.5` или `~ -5.0` | — | — |
+| Диапазон значений (`A - B`) | Value range | Два числа в одной ячейке через знак `-` с пробелами по обе стороны: первое — нижнее значение, второе — верхнее, например `4.7 - 5.0`. Отрицательные числа пишутся с минусом без пробела: `-5.2 - -4.8` | — | — |
+| Верификация диапазона | Range validation | Если указан диапазон, второе значение должно быть строго больше первого. Равенство или обратный порядок — ошибка проверки | — | — |
 
 ## 4. Проект: реестр, статусы, процесс
 
