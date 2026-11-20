@@ -1,6 +1,6 @@
 # PROGRESS — RU Labour Market Analysis 2026
 
-Updated: 2026-11-20 | Branch: feature/cbr-monitoring-tables (от main `1124866`) | Текущий этап: 1 — источники данных (rework needed)
+Updated: 2026-11-20 | Branch: main (`b5060b4`; PR #35 `b979aec`, PR #36 `b5060b4` смержены, ветки удалены) | Текущий этап: 1 — источники данных (rework needed)
 
 ## Дорожная карта (предложенная; этапы 3–7 уточняются)
 | Этап | Содержание | Статус | Комментарий |
