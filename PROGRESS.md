@@ -1,6 +1,6 @@
 # PROGRESS — RU Labour Market Analysis 2026
 
-Updated: 2026-11-19 | Branch: main (`1124866`); открыт PR #18 (`feature/brief-sync-fix`, `57ec509`) | Текущий этап: 1 — источники данных (rework needed)
+Updated: 2026-11-20 | Branch: feature/cbr-monitoring-tables (от main `1124866`) | Текущий этап: 1 — источники данных (rework needed)
 
 ## Дорожная карта (предложенная; этапы 3–7 уточняются)
 | Этап | Содержание | Статус | Комментарий |
@@ -18,7 +18,7 @@ Updated: 2026-11-19 | Branch: main (`1124866`); открыт PR #18 (`feature/br
 - Образец (2026): `data/raw/cbr_key_rate/keyrate_2026.html` (+ README.txt). Raw не в git.
 - Целевой год — `config/project.yaml` (`target_year: 2026`). Правило: только данные за 2026 год. Источник без данных за 2026 — остаётся в реестре с `data_2026: N/A`, `enabled: false`. Не проверено — `unverified`, `enabled: false`.
 - ОРС и ИПЦ (`rosstat_orc`, `rosstat_cpi`): данные за 2026 из PDF «Социально-экономическое положение России, январь–сентябрь 2026» → `data/raw/rosstat_orc/` (7 CSV, стр. 196–205), `data/raw/rosstat_cpi/` (таблица 1, стр. 126–127); сверены 2026-11-18. `enabled: false`, пока не сверён ЕМИСС XLSX.
-- Сводка реестра: enabled 1 (cbr_key_rate); available 6 (cbr_key_rate, rosstat_orc, rosstat_cpi, rostrud_registered — данные Роструда из таблиц 6–7 того же PDF; cbr_monitoring — ноябрь 2026, файл `data/raw/cbr_monitoring/1126.pdf`; hh_monthly — январь 2026); N/A 3 (rlms_hse, hse_isiez, rosstat_part_time); unverified 6.
+- Сводка реестра: enabled 1 (cbr_key_rate); available 6 (cbr_key_rate, rosstat_orc, rosstat_cpi, rostrud_registered — данные Роструда из таблиц 6–7 того же PDF; cbr_monitoring — ноябрь 2026, табл. 1–8 извлечены в CSV (`data/raw/cbr_monitoring/`, 2026, пустых нет); hh_monthly — январь 2026); N/A 3 (rlms_hse, hse_isiez, rosstat_part_time); unverified 6.
 <!-- registry-summary: total=15 available=6 enabled=1 na=3 unverified=6 -->
 - Документация: `docs/sources.md`, `data/README.md`, `docs/prerequisites.md`, `docs/cheatsheets/` (Windows / macOS / Linux).
 - Окружение: `requirements.txt` ставится в `.venv` без ошибок (pandas 3.1.1, numpy 2.5.5, lxml, pdfplumber, pytest 9.2). Не проверено на macOS / Linux.
@@ -51,9 +51,8 @@ PR #1–#7 смержены; ветки удалены (локально и в o
 14. Устаревшие ветки: локальная `list` (`08c2216`) и `origin/feature/*` (7 шт., не в main) — проверить и удалить.
 
 ## Следующие шаги
-1. PR #18 (`feature/brief-sync-fix`: статусы Росстата и Роструда в brief) — ревью и merge.
-2. МСП: ПП № 1412 — применяется редакция 2017 года (решение владельца; источник t_0001201711270015.pdf); редакция от 29.10.2024 не применяется. Норма «Сколково/ИНТЦ» (ст. 4 ч. 3) проверена 2026-11-19. Источник цели 3 — Росстат. Пороги ПП № 265 (120/800/2000 млн ₽) и предел 1000 (ПП № 1412) подтверждены.
-3. Этап 1: ЕМИСС XLSX (ОРС, ИПЦ) и 24.rosstat.gov.ru — с российского IP; файлы от владельца `cbr_monitoring`, `rosstat_part_time`; ответы преподавателя. Этап 2 — после статуса «ready» по этапу 1.
+1. МСП: ПП № 1412 — применяется редакция 2017 года (решение владельца; источник t_0001201711270015.pdf); редакция от 29.10.2024 не применяется. Норма «Сколково/ИНТЦ» (ст. 4 ч. 3) проверена 2026-11-19. Источник цели 3 — Росстат. Пороги ПП № 265 (120/800/2000 млн ₽) и предел 1000 (ПП № 1412) подтверждены.
+2. Этап 1: ЕМИСС XLSX (ОРС, ИПЦ) и 24.rosstat.gov.ru — с российского IP; файл от владельца `rosstat_part_time`; ответы преподавателя. Этап 2 — после статуса «ready» по этапу 1.
 
 ## Правило обновления
 В конце каждого этапа: дата, что сделано, открытые вопросы, следующий шаг. ≤60 строк, без персональных данных и служебных ссылок.
