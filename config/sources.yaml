@@ -207,14 +207,14 @@ sources:
     role: независимый
     goal: [1, 3]
     indicators: обзоры экономики, МСП, рынка труда
-    access: https://cmasf.ru/papers.html
+    access: http://www.forecast.ru/
     format: PDF
     frequency: по мере выхода
     geography: РФ
-    status: to_verify
-    data_2026: unverified
+    status: verified
+    data_2026: available
     enabled: false
-    notes: cmasf.ru недоступен из среды проверки
+    notes: сайт ЦМАКП — forecast.ru; cmasf.ru удалён как недействительный. Mon092026 (сентябрь 2026, Q1–сентябрь 2026, оценки и факт) — данные за 2026. 30102026 (прогноз 2026–2029) — только для сравнения, не данные за 2026
 
   - id: ilostat_oecd
     name: ILOSTAT / OECD

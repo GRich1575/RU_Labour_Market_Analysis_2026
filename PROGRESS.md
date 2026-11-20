@@ -18,8 +18,8 @@ Updated: 2026-11-20 | Branch: main (`b5060b4`; PR #35 `b979aec`, PR #36 `b5060b4
 - Образец (2026): `data/raw/cbr_key_rate/keyrate_2026.html` (+ README.txt). Raw не в git.
 - Целевой год — `config/project.yaml` (`target_year: 2026`). Правило: только данные за 2026 год. Источник без данных за 2026 — остаётся в реестре с `data_2026: N/A`, `enabled: false`. Не проверено — `unverified`, `enabled: false`.
 - ОРС и ИПЦ (`rosstat_orc`, `rosstat_cpi`): данные за 2026 из PDF «Социально-экономическое положение России, январь–сентябрь 2026» → `data/raw/rosstat_orc/` (7 CSV, стр. 196–205), `data/raw/rosstat_cpi/` (таблица 1, стр. 126–127); сверены 2026-11-18. `enabled: false`, пока не сверён ЕМИСС XLSX.
-- Сводка реестра: enabled 1 (cbr_key_rate); available 6 (cbr_key_rate, rosstat_orc, rosstat_cpi, rostrud_registered — данные Роструда из таблиц 6–7 того же PDF; cbr_monitoring — ноябрь 2026, табл. 1–8 извлечены в CSV (`data/raw/cbr_monitoring/`, 2026, пустых нет); hh_monthly — январь 2026); N/A 3 (rlms_hse, hse_isiez, rosstat_part_time); unverified 6.
-<!-- registry-summary: total=15 available=6 enabled=1 na=3 unverified=6 -->
+- Сводка реестра: enabled 1 (cbr_key_rate); available 7 (cbr_key_rate, rosstat_orc, rosstat_cpi, rostrud_registered — данные Роструда из таблиц 6–7 того же PDF; cbr_monitoring — ноябрь 2026, табл. 1–8 извлечены в CSV (`data/raw/cbr_monitoring/`, 2026, пустых нет); hh_monthly — январь 2026; cmasf — Mon092026 Q1–сент 2026, CSV в `data/raw/cmasf/`); N/A 3 (rlms_hse, hse_isiez, rosstat_part_time); unverified 5. Прогноз ЦМАКП (30102026, 2026–2029) не считается данными за 2026: хранится для сравнения.
+<!-- registry-summary: total=15 available=7 enabled=1 na=3 unverified=5 -->
 - Документация: `docs/sources.md`, `data/README.md`, `docs/prerequisites.md`, `docs/cheatsheets/` (Windows / macOS / Linux).
 - Окружение: `requirements.txt` ставится в `.venv` без ошибок (pandas 3.1.1, numpy 2.5.5, lxml, pdfplumber, pytest 9.2). Не проверено на macOS / Linux.
 - Пошаговая установка (RU/EN, схемы в `docs/homework/img/`, не реальные скриншоты): `docs/homework/setup_guide_ru.html`, `setup_guide_en.html`. Проверено рендером в Chrome (headless), все картинки подключены; macOS/Linux без картинок.
@@ -30,7 +30,7 @@ Updated: 2026-11-20 | Branch: main (`b5060b4`; PR #35 `b979aec`, PR #36 `b5060b4
 PR #1–#7 смержены; ветки удалены (локально и в origin). Защита main: Ruleset `protect-main` (проверено: GH013). Исключение `prerequisites.md` удалено (#7). Сообщение squash #4 — английское (исправить нельзя без переписывания main). Новая работа — из main, ветка `feature/<тема>`. Роли: один участник — владелец проекта, координатор, владелец данных и стюард. Добавление участников — позже. PR #17 (`feature/brief-sync`, `c876786`, `41ce26a`) закрыт без merge; ветка удалена (локально и в origin). Решение владельца 2026-11-19: cleanup и удаление дублей не выполняются, проект остаётся как есть.
 
 ## Ограничения среды проверки
-- Недоступны из среды: rosstat.gov.ru, cetr.ru, cmasf.ru (000); fedstat.ru, api.hh.ru, ilostat, oecd (403).
+- Недоступны из среды: rosstat.gov.ru, cetr.ru (000); fedstat.ru, api.hh.ru, ilostat, oecd (403).
 - **Для команды:** из-за пределов РФ не открываются fedstat.ru (ЕМИСС, «Forbidden») и 24.rosstat.gov.ru (таймаут, методология МСП), 2026-11-18. Проверить с российского IP, записать в `source_checks.md`.
 - Поиск даёт ссылки, но не подтверждает содержимое файлов.
 
